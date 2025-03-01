@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "sf-pro-regular";
+  src: url(./font/sf-pro-regular.OTF);
+}
+@font-face {
+  font-family: "space-tech-italic";
+  src: url(./font/space-tech-italic.ttf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: "sf-pro-regular", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.brand {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--clr-brand-text);
+  float: left;
+  padding-bottom: 5px;
+  text-align: center;
+  width: 100%;
+  left: 0;
+}

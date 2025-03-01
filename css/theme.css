@@ -1,0 +1,596 @@
+@font-face {
+  font-family: "sf-pro-regular";
+  src: url(./font/sf-pro-regular.OTF);
+}
+@font-face {
+  font-family: "space-tech-italic";
+  src: url(./font/space-tech-italic.ttf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: "sf-pro-regular", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* :root {
+  --bak-wall: url(wallpaper.jpg);
+} */
+:root {
+  --clr-body-bg: #007dfe;
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: #022db8;
+  --clr-card-bg: #022db8;
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(255, 255, 255);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: #022db8;
+  --clr-btns-actv-bg: #022db8;
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: #022db8;
+  /* --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(86, 153, 248, 0.3),
+    rgba(86, 153, 248, 0.3)
+  ); */
+  --clr-rates-td-bg: #fff;
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: #6c6c6c;
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(255, 255, 255);
+  --clr-phdr-text: hsl(200, 5.88%, 40%);
+  --clr-phdr-text-fcs: rgb(174, 180, 183);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: #022db8;
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: hsl(200, 5.88%, 40%);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: #022db8;
+  --clr-banner-span: rgb(255, 255, 255);
+  --clr-float-btns-bg: linear-gradient(to bottom, #5699f8 0%, #022db8 40%);
+  --clr-float-btns-actv-bg: linear-gradient(to bottom, #5699f8 0%, #022db8 40%);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  --clr-modal-close-text: rgb(255, 255, 255);
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  /* --popup-close-img: url(""); */
+  --clr-box-bg: linear-gradient(
+    to right,
+    rgb(151, 51, 238, 0.1),
+    rgba(224, 74, 178, 0.1)
+  );
+}
+
+.auto-grid {
+  --min-column-size: 225px;
+
+  display: grid;
+  gap: clamp(1rem, 5vmax, 1.625rem);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--min-column-size)), 1fr)
+  );
+}
+
+.wraps {
+  --max-width: 55rem;
+  width: min(100% - 0rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.card {
+  color: var(--clr-text);
+  background-color: var(--clr-card-bg);
+  border: 1.5px solid var(--clr-card-border);
+}
+
+.card > * {
+  margin: 0;
+}
+
+.card > *:not(:last-child) {
+  margin-bottom: 0rem;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.color-picker > fieldset {
+  display: flex;
+  gap: 1.9rem;
+  width: fit-content;
+  padding: 1rem 1rem;
+  margin-inline: auto;
+  border-radius: 2rem 2rem 2rem 2rem;
+  border: none;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.color-picker input[type="radio"] {
+  appearance: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  outline: 4px solid var(--radio-color, currentColor);
+  outline-offset: 3px;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+.color-picker input[type="radio"]:active {
+  transform: scale(0.9);
+}
+
+.color-picker input[type="radio"]:checked {
+  background-color: var(--radio-color);
+}
+
+.color-picker input[type="radio"]#default {
+  --radio-color: #e35cb9;
+}
+.color-picker input[type="radio"]#dark {
+  --radio-color: #555555;
+}
+.color-picker input[type="radio"]#purple {
+  --radio-color: #a147ef;
+}
+.color-picker input[type="radio"]#blue {
+  --radio-color: #1f75ff;
+}
+.color-picker input[type="radio"]#orange {
+  --radio-color: #f66429;
+}
+.color-picker input[type="radio"]#green {
+  --radio-color: #0dc901;
+}
+
+.dark {
+  /* --clr-body-bg: linear-gradient(to right, #434343, #353535); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(67, 67, 67);
+  --clr-card-bg: rgb(67, 67, 67);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(67, 67, 67);
+  --clr-btns-actv-bg: rgb(85, 85, 85);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(67, 67, 67);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(67, 67, 67, 0.3),
+    rgba(67, 67, 67, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(67, 67, 67);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(67, 67, 67);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+.purple {
+  /* --clr-body-bg: linear-gradient(to right, #9733ee, #663399); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(151, 51, 238);
+  --clr-card-bg: rgb(151, 51, 238);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(151, 51, 238);
+  --clr-btns-actv-bg: rgb(161, 71, 239);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(151, 51, 238);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(151, 51, 238, 0.3),
+    rgba(151, 51, 238, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(151, 51, 238);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(151, 51, 238);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+.blue {
+  /* --clr-body-bg: linear-gradient(to right, #2a5298, #1e3c72); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(7, 102, 255);
+  --clr-card-bg: rgb(7, 102, 255);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(7, 102, 255);
+  --clr-btns-actv-bg: rgb(31, 117, 255);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(7, 102, 255);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(7, 102, 255, 0.3),
+    rgba(7, 102, 255, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(7, 102, 255);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(7, 102, 255);
+  --clr-banner-span: rgb(159, 175, 202);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+.orange {
+  /* --clr-body-bg: linear-gradient(to right, #f0f2f5, #f0f2f5); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(245, 83, 18);
+  --clr-card-bg: rgb(245, 83, 18);
+  --clr-card-border: rgba(154, 156, 158, 0.5);
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(240, 242, 245);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(245, 83, 18);
+  --clr-btns-actv-bg: rgb(246, 100, 41);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(245, 83, 18);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(245, 83, 18, 0.3),
+    rgba(245, 83, 18, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(245, 83, 18);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(245, 83, 18);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(5, 5, 5); */
+  /* --clr-modal-close-text: rgb(5, 5, 5); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+.green {
+  /* --clr-body-bg: linear-gradient(to right, #51814c, #386f32); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(11, 180, 0);
+  --clr-card-bg: rgb(11, 180, 0);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(11, 180, 0);
+  --clr-btns-actv-bg: rgb(13, 201, 1);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(11, 180, 0);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(11, 180, 0, 0.3),
+    rgba(11, 180, 0, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(11, 180, 0);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(11, 180, 0);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+:root:has(#dark:checked) {
+  /* --clr-body-bg: linear-gradient(to right, #434343, #353535); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(67, 67, 67);
+  --clr-card-bg: rgb(67, 67, 67);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(67, 67, 67);
+  --clr-btns-actv-bg: rgb(85, 85, 85);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(67, 67, 67);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(67, 67, 67, 0.3),
+    rgba(67, 67, 67, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(67, 67, 67);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(67, 67, 67);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+:root:has(#purple:checked) {
+  /* --clr-body-bg: linear-gradient(to right, #9733ee, #663399); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(151, 51, 238);
+  --clr-card-bg: rgb(151, 51, 238);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(151, 51, 238);
+  --clr-btns-actv-bg: rgb(161, 71, 239);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(151, 51, 238);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(151, 51, 238, 0.3),
+    rgba(151, 51, 238, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(151, 51, 238);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(151, 51, 238);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+:root:has(#blue:checked) {
+  /* --clr-body-bg: linear-gradient(to right, #2a5298, #1e3c72); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(7, 102, 255);
+  --clr-card-bg: rgb(7, 102, 255);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(7, 102, 255);
+  --clr-btns-actv-bg: rgb(31, 117, 255);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(7, 102, 255);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(7, 102, 255, 0.3),
+    rgba(7, 102, 255, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(7, 102, 255);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(7, 102, 255);
+  --clr-banner-span: rgb(159, 175, 202);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+:root:has(#orange:checked) {
+  /* --clr-body-bg: linear-gradient(to right, #f0f2f5, #f0f2f5); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(245, 83, 18);
+  --clr-card-bg: rgb(245, 83, 18);
+  --clr-card-border: rgba(154, 156, 158, 0.5);
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(240, 242, 245);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(245, 83, 18);
+  --clr-btns-actv-bg: rgb(246, 100, 41);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(245, 83, 18);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(245, 83, 18, 0.3),
+    rgba(245, 83, 18, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(245, 83, 18);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(245, 83, 18);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(5, 5, 5); */
+  /* --clr-modal-close-text: rgb(5, 5, 5); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}
+
+:root:has(#green:checked) {
+  /* --clr-body-bg: linear-gradient(to right, #51814c, #386f32); */
+  --clr-nav-text: rgb(255, 255, 255);
+  --clr-nav-bg: rgb(11, 180, 0);
+  --clr-card-bg: rgb(11, 180, 0);
+  --clr-card-border: none;
+  --clr-text: rgb(255, 255, 255);
+  --clr-status-text: rgb(55, 71, 79);
+  --clr-greetings-text: rgb(55, 71, 79);
+  --clr-popcheck-bg: rgb(231, 194, 236);
+  --clr-btns-text: rgb(255, 255, 255);
+  --clr-btns-text-fcs: rgb(255, 255, 255);
+  --clr-btns-bg: rgb(11, 180, 0);
+  --clr-btns-actv-bg: rgb(13, 201, 1);
+  --clr-link: rgb(7, 102, 255);
+  --clr-link-fcs: rgb(13, 201, 1);
+  --clr-rates-th-bg: rgb(11, 180, 0);
+  --clr-rates-td-bg: linear-gradient(
+    135deg,
+    rgba(11, 180, 0, 0.3),
+    rgba(11, 180, 0, 0.3)
+  );
+  --clr-rates-th-text: rgb(255, 255, 255);
+  --clr-rates-td-text: rgb(255, 255, 255);
+  --clr-rates-sup: rgb(255, 0, 0);
+  --clr-brand-text: rgb(55, 71, 79);
+  --clr-phdr-text: rgb(174, 180, 183);
+  --clr-phdr-text-fcs: rgba(174, 180, 183, 0.4);
+  --clr-input-bg: transparent;
+  --clr-input-border: rgb(174, 180, 183);
+  --clr-input-border-fcs: rgb(11, 180, 0);
+  --clr-input-text: rgb(55, 71, 79);
+  --clr-osi-text: rgb(174, 180, 183);
+  --clr-osi-border: rgb(174, 180, 183);
+  --clr-osi-border-fcs: rgb(11, 180, 0);
+  --clr-banner-span: rgb(255, 255, 255);
+  /* --clr-music-marq: rgb(255, 255, 255); */
+  /* --clr-modal-close-text: rgb(255, 255, 255); */
+  --clr-shop-text: rgb(255, 255, 255);
+  --clr-brand-social_media: rgb(55, 71, 79);
+  --popup-close-img: url("image/arrow-blk.png");
+}

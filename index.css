@@ -1,0 +1,392 @@
+@font-face {
+  font-family: "sf-pro-regular";
+  src: url(./font/sf-pro-regular.OTF);
+}
+@font-face {
+  font-family: "space-tech-italic";
+  src: url(./font/space-tech-italic.ttf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: "sf-pro-regular", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.portal {
+  font-family: "sf-pro-regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: var(--clr-body-bg);
+  /* background-image: var(--bak-wall); */
+}
+
+.disable-text-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Start of Instruction */
+.instruction p {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(55, 71, 79);
+  margin-bottom: 8%;
+}
+/* End of Instruction */
+
+/* Start of Omada Buttons */
+.status {
+  color: var(--clr-status-text);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  width: fit-content;
+  margin-inline: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 0.5em;
+}
+
+.oper-section-item {
+  font-size: 18px;
+  font-weight: 400;
+  display: block;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-bottom: 15px;
+  background: transparent;
+  color: var(--clr-osi-text);
+  text-align: left;
+  border-radius: 24px;
+  border: 2px solid var(--clr-input-border);
+  width: 100%;
+  /* height: 42px;
+  width: 300px; */
+  padding: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* .oper-section-item img {
+  height: 25px;
+  width: auto;
+} */
+
+.oper-section-item#hotspot-selector {
+  /* display: none; */
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  width: 40%;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: auto;
+  margin-bottom: 5px;
+  background: rgba(174, 180, 183, 0.3);
+  /* border: 2px solid var(--clr-input-border); */
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 2px;
+}
+.oper-section-item#hotspot-selector {
+  /* background: url(./img/icon/hotspot.png) 10px; */
+  background-repeat: no-repeat;
+  /* text-indent: 35px; */
+  outline: none;
+}
+.oper-section-item#hotspot-selector:focus {
+  /* border: 2px solid var(--clr-input-border-fcs); */
+  border: none;
+  outline: none;
+}
+
+#rotatingText {
+  font-size: 15px;
+}
+
+#input-phone-num {
+  margin-bottom: 20px;
+}
+
+.add {
+  display: inline-block;
+  border-radius: 5px 0 0 5px;
+  height: 42px;
+  line-height: 40px;
+  width: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#country-code {
+  height: 42px;
+  width: 40px;
+  border-radius: 0;
+}
+
+#phone-number {
+  border-radius: 0 5px 5px 0;
+  /* height: 42px;
+  width: 410px; */
+  width: 100%;
+  margin-top: 10px;
+}
+
+#input-verify-code {
+  margin-bottom: 20px;
+}
+
+#verify-code {
+  border-radius: 5px 0 0 5px;
+  /* height: 42px;
+  width: 400px; */
+  width: 100%;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+#get-code {
+  display: inline-block;
+  height: 42px;
+  width: 100px;
+  border-radius: 0 5px 5px 0;
+}
+
+::placeholder {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--clr-phdr-text);
+  letter-spacing: normal;
+}
+
+.input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  outline: none;
+  border-radius: 24px;
+  color: var(--clr-input-text);
+  background: var(--clr-input-bg);
+  border: 2px solid var(--clr-input-border);
+  letter-spacing: 0.5px;
+  caret-color: var(--clr-input-text);
+}
+
+.input:focus {
+  outline: 2px solid var(--clr-input-border-fcs);
+}
+
+.input:focus::placeholder {
+  color: var(--clr-phdr-text-fcs);
+}
+
+input#voucherCode {
+  background: url(./img/icon/voucher.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+input#username {
+  background: url(./img/icon/username.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+input#password {
+  background: url(./img/icon/password.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+.eye-ico img {
+  position: absolute;
+  height: 70%;
+  width: auto;
+  top: 7px;
+  right: 10px;
+}
+
+input#simplePassword {
+  background: url(./img/icon/password.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+input#phone-number {
+  background: url(./img/icon/phone.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+input#verify-code {
+  background: url(./img/icon/code.png) 10px;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+}
+
+/* Start of input name */
+.inputName {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(55, 71, 79);
+  text-align: left;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  --max-width: 30rem;
+  width: min(90% - 0rem, var(--max-width));
+}
+/* End of input name */
+
+.button {
+  background: var(--clr-btns-bg);
+  border-radius: 24px;
+  border: none;
+  margin: 0 auto;
+  --max-width: 30rem;
+  width: min(90% - 0rem, var(--max-width));
+  padding-top: 14px;
+  padding-bottom: 14px;
+  display: block;
+  outline: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button p {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--clr-btns-text);
+  text-align: center;
+}
+.button:active {
+  background: var(--clr-btns-actv-bg);
+  transform: scale(0.9);
+  border: none;
+  outline: none;
+}
+.button:focus {
+  color: var(--clr-btns-text-fcs);
+  border: none;
+  outline: none;
+}
+
+.input-link {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--clr-link);
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.input-link:hover,
+.input-link:focus {
+  color: var(--clr-link-fcs);
+}
+
+.blink {
+  animation: blinker 3s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+/* End of Omada Buttons */
+
+/* Start of main-logo */
+.main-logo img {
+  height: 100px;
+  width: auto;
+  /* border-radius: 1em; */
+  /* padding: 10px; */
+  /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); */
+}
+
+.main-logo p {
+  font-family: "space-tech-italic", sans-serif;
+  color: rgba(224, 74, 178);
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: lowercase;
+  margin: 0;
+  float: none;
+}
+/* End of main-logo */
+
+/* Start of Main Greeting */
+.maingreeting {
+  font-family: "sf-pro-regular", sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 1px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+/* End of Main Greeting */
+
+/* Start of Omada Login Box CSS */
+.form-box {
+  display: block;
+  position: relative;
+  --max-width: 20rem;
+  width: min(90% - 0rem, var(--max-width));
+  border-radius: 20px;
+  align-items: center;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  clear: both;
+}
+.form-glass {
+  /* background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  ); */
+  background: rgb(255, 255, 255);
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* End of Omada Login Box CSS */
