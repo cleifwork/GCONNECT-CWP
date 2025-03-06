@@ -23,27 +23,13 @@ function getQueryStringKey(key) {
 }
 
 // Extract relevant parameters from the URL
-// var clientMac = getQueryStringKey("clientMac");
-// var apMac = getQueryStringKey("apMac");
-// var gatewayMac = getQueryStringKey("gatewayMac");
-// var ssidName = getQueryStringKey("ssidName");
-// var radioId = getQueryStringKey("radioId");
-// var vid = getQueryStringKey("vid");
-// var originUrl = getQueryStringKey("originUrl");
-
 var clientMac = getQueryStringKey("clientMac");
 var apMac = getQueryStringKey("apMac");
-var gatewayMac = getQueryStringKey("gatewayMac") || undefined;
-var ssidName = getQueryStringKey("ssidName") || undefined;
-var radioId = !!getQueryStringKey("radioId")
-  ? Number(getQueryStringKey("radioId"))
-  : undefined;
-var vid = !!getQueryStringKey("vid")
-  ? Number(getQueryStringKey("vid"))
-  : undefined;
+var gatewayMac = getQueryStringKey("gatewayMac");
+var ssidName = getQueryStringKey("ssidName");
+var radioId = getQueryStringKey("radioId");
+var vid = getQueryStringKey("vid");
 var originUrl = getQueryStringKey("originUrl");
-var previewSite = getQueryStringKey("previewSite");
-
 var submitUrl = "/portal/auth"; // Authentication API endpoint
 var isCommited = false; // Flag to prevent duplicate submissions
 
