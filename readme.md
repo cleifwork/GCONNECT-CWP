@@ -43,23 +43,18 @@ The images showcase the interface of the GConnect Custom WiFi Portal, designed t
 > [!NOTE] 
 > _Tested in Windows 10 and Windows 11_
 		
-- Download the **[GCONNECT-V3](https://github.com/cleifwork/GCONNECT/tree/GCONNECT-V3)**
+- Download the **[GCONNECT-CWP](https://github.com/cleifwork/GCONNECT-CWP)**
 - Click Code > Download Zip
-- Extract main folder to your Desktop
-- Launch the app thru _'LaunchPad.bat'_.
+- Import to your Omada Portal
+- Launch portal
+
 
 ## Running Tests
-- (MD) Click on **'Local Variables'** to verify if the voucher codes have been successfully added to their respective amounts.
-- Send amount to the Server Phone's registered e-wallet (Gcash | Maya) number.
-    - Sender should receive WiFi Voucher via SMS. 
+- Add tests here...
 
 
 ## Optimizations
-- Added checks for all required columns (Code, Price, Duration, Type)
-- Optimized and refactored error handling 
-- Added utility script for common paths and functions
-- The app is now portable no python and node.js intallation needed (launch anywhere)
-- Implemented cache-busting in PRINT VOUCHER function (no need to clear cache when loading new source file)
+- Added optimizations here...
 
 
 ## Screenshots
