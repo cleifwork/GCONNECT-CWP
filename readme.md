@@ -63,7 +63,7 @@ The images showcase the interface of the GConnect Custom WiFi Portal, designed t
 
 
 ## Screenshots
-![App Screenshot](https://drive.google.com/uc?export=view&id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF)
+![App Screenshot](https://drive.google.com/uc?export=view&id=1gIYWvE2EHV0q9U9Sr1Zh-haKMD2eQthX)
 
 
 ## Support
