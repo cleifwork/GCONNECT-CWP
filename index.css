@@ -94,6 +94,13 @@ body.portal {
   font-size: 13px;
 }
 
+::placeholder {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--clr-phdr-text);
+  letter-spacing: normal;
+}
+
 .input {
   display: block;
   margin-left: auto;
