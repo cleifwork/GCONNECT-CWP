@@ -90,6 +90,7 @@ function handleSubmit(event) {
     hintElement.innerHTML = errorHintMap[data.errorCode] || "Unknown error";
 
     if (data.errorCode === 0) {
+      audio.play(); // Play the sound effect
       // Successful authentication, redirect to landing page
       window.location.href = data.landingUrl;
     } else {
@@ -108,9 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Preload login sound effect
   var audio = new Audio("./audio/login.mp3");
-  document.getElementById("button-login").addEventListener("click", function () {
-    audio.play(); // Play sound effect on login button click
-  });
+  // document.getElementById("button-login").addEventListener("click", function () {
+  //   audio.play(); // Play sound effect on login button click
+  // });
 });
 
 // Function to show the popup
