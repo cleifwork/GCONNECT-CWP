@@ -8,7 +8,7 @@ The GCONNECT-CWP interface features a clean and modern design with a blue color 
 1. **Header Section:**
     - The top section displays the title "GConnect Feeds" in bold white text.
     - Below the title, there is a prompt to "Check our wifi rates!" encouraging users to explore more about the service.
-    - A "SEE MORE" button is prominently displayed, inviting users to click for additional information.
+    - A "SEE RATES" button is prominently displayed, inviting users to click for additional information.
 
 2. **Main Section:**
     - The main section features the GConnect logo, which includes the text "GConnect" with a stylized WiFi symbol integrated into the design.
@@ -22,8 +22,9 @@ The GCONNECT-CWP interface features a clean and modern design with a blue color 
     - A "GCONNECT" button is prominently displayed at the bottom, allowing users to submit their voucher codes and gain access to the WiFi service.
 
 4. **Wi-Fi Rates Page (See More):**
-    - When users click the "SEE MORE" button, they are directed to a page displaying a detailed table of Wi-Fi rates provided by GCONNECT WIFI.
+    - When users click the "SEE RATES" button, they are directed to a page displaying a detailed table of Wi-Fi rates provided by GCONNECT WIFI.
     - The table lists different pricing options, the corresponding time duration for each price, and the number of users allowed for each option. The prices are listed in Philippine Pesos (₱).
+    - The table footer displays another rotating text to display the disclaimers.
 
 The images showcase the interface of the GConnect Custom WiFi Portal, designed to provide users with an easy and visually appealing way to access WiFi services. The interface demonstrates a user-friendly design and functionality, making it an excellent choice for businesses and venues looking to offer seamless WiFi access to their customers.
 
