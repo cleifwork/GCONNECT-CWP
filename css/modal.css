@@ -1,0 +1,86 @@
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  z-index: 1000;
+  overflow: auto;
+}
+
+.modal-content {
+  position: relative;
+  margin: 5% auto;
+  background-color: white;
+  padding: 20px;
+  width: 80%;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Image container with scrollable area */
+.image-container {
+  max-height: 300px; /* Set maximum height for scrolling */
+  overflow-y: hidden; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between images */
+  padding-top: 10px;
+}
+
+.image-container img {
+  width: 100%; /* Responsive images */
+  max-height: 200px;
+  object-fit: contain; /* Preserve aspect ratio */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.image-container img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Instructions container */
+.instructions-container {
+  max-height: 200px; /* Set maximum height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  text-align: left; /* Align text to the left for readability */
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.instructions-container h4 {
+  margin-bottom: 10px;
+  /* font-size: 20px; */
+  color: #333;
+}
+
+.instructions-container p {
+  margin: 1px 0;
+  line-height: 1.5;
+  color: #555;
+  font-size: 12px !important;
+}
+
+.instructions-container b {
+  margin: 5px 0;
+  line-height: 1.5;
+  color: #555;
+  font-size: 12px;
+}
