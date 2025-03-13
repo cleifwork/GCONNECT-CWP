@@ -13,7 +13,6 @@ html {
 
 * {
   font-family: "sf-pro-regular", sans-serif;
-  font-size: 18px;
   font-weight: 600;
   margin: 0;
   padding: 0;
@@ -32,19 +31,22 @@ html {
   -moz-border-radius: 24px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
 .rates tr {
   background: var(--clr-rates-td-bg);
   color: var(--clr-rates-td-text);
 }
+
 .thead th {
   background: var(--clr-rates-th-bg);
   color: var(--clr-rates-th-text);
   letter-spacing: 3px;
   word-spacing: 3px;
-  padding: 0px;
+  padding: 5px;
 }
+
 .tfoot th {
-  font-size: 12px;
+  font-size: 10px;
   background: var(--clr-rates-th-bg);
   color: var(--clr-rates-th-text);
   letter-spacing: 0px;
@@ -70,6 +72,10 @@ html {
   border-radius: 0px 0px 22px 22px;
   -webkit-border-radius: 0px 0px 22px 22px;
   -moz-border-radius: 0px 0px 22px 22px;
+}
+
+#disclaimer {
+  font-size: 13px;
 }
 
 .rates sup {
