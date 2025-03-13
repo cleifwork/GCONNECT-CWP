@@ -39,22 +39,23 @@ The images showcase the interface of the GConnect Custom WiFi Portal, designed t
 
 ## Installation & Configuration
 ### REQUIREMENTS:
-**1. SHOULD HAVE A WINDOWS PC/LAPTOP** 
-> [!NOTE] 
-> _Tested in Windows 10 and Windows 11_
-		
+**1. SHOULD HAVE A WINDOWS PC/LAPTOP** 		
 - Download the **[GCONNECT-CWP](https://github.com/cleifwork/GCONNECT-CWP)**
 - Click Code > Download Zip
+> [!IMPORTANT] 
+> _Make sure to extract and zip the main folder only before uploading to your portal_
 - Import to your Omada Portal
-- Launch portal
 
 
 ## Running Tests
-- Add tests here...
+- Connect to your WiFi Hotspot to launch the portal
 
 
-## Optimizations
-- Added optimizations here...
+## Optimizations & Improvements
+- Centralized the script for rotating text
+- Removal of unused codes (html, css, js)
+- Added GCash column
+- Added GCash payment guide button
 
 
 ## Screenshots
