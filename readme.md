@@ -43,7 +43,7 @@ The images showcase the interface of the GConnect Custom WiFi Portal, designed t
 - Download the **[GCONNECT-CWP](https://github.com/cleifwork/GCONNECT-CWP)**
 - Click Code > Download Zip
 > [!IMPORTANT] 
-> _Make sure to extract and re-zip the MAIN FOLDER only before uploading it to your portal._
+> _Make sure to extract and re-zip the MAIN FOLDER ONLY, before uploading it to your portal._
 
 
 ## Running Tests
