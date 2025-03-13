@@ -12,15 +12,16 @@
       <link href="./css/reinvent.css" type="text/css" rel="stylesheet" />
       <link href="./css/style.css" type="text/css" rel="stylesheet" />
       <link href="./css/rate.css" type="text/css" rel="stylesheet" />
-      <link href="./css/contact.css" type="text/css" rel="stylesheet" />
+      <!-- <link href="./css/contact.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/brand.css" type="text/css" rel="stylesheet" />
       <link href="./css/theme.css" type="text/css" rel="stylesheet" />
-      <link href="./css/popslide.css" type="text/css" rel="stylesheet" />
+      <!-- <link href="./css/popslide.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/popcheck.css" type="text/css" rel="stylesheet" />
-      <link href="./css/tagline.css" type="text/css" rel="stylesheet" />
-      <link href="./css/auto-popup.css" type="text/css" rel="stylesheet" />
-      <link href="./css/box.css" type="text/css" rel="stylesheet" />
+      <!-- <link href="./css/tagline.css" type="text/css" rel="stylesheet" /> -->
+      <!-- <link href="./css/auto-popup.css" type="text/css" rel="stylesheet" /> -->
+      <!-- <link href="./css/box.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/counter.css" type="text/css" rel="stylesheet" />
+      <link href="./css/modal.css" type="text/css" rel="stylesheet" />
    </head>
 
    <body class="portal disable-text-selection">
@@ -60,24 +61,7 @@
 
                         <div class="sign-in-form">
                         
-                           <div id="rotatingText">Fast and Reliable Internet!</div>
-
-                           <script>
-                               const messages = [
-                                   "Fast and Reliable Internet!",
-                                   "Up to 20Mbps download/upload speed!",
-                                   "Enjoy seamless internet access!",
-                                   "Check out our weekly & monthly plans!"
-                               ];
-                               let index = 0;
-                           
-                               function rotateText() {
-                                   index = (index + 1) % messages.length;
-                                   document.getElementById("rotatingText").innerText = messages[index];
-                               }
-                           
-                               setInterval(rotateText, 3000); // Change text every 3 seconds
-                           </script>
+                           <div id="rotatingText1">Enjoy seamless internet access!</div>
 
                            <!-- Voucher Code: -->
                            <div id="input-voucher" class="inputName">
@@ -123,9 +107,10 @@
                      <table id="rates" class="rates">
                         <thead>
                            <tr class="thead">
-                              <th id="th-price">PRICE</th>
-                              <th>TIME</th>
-                              <th id="th-valid">USER</th>
+                              <th id="th-price">Cash</th>
+                              <th id="e-wallet">GCash</th>
+                              <th>Time</th>
+                              <th id="th-valid">User</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -133,85 +118,175 @@
                               <td>
                                  <b>&#8369; 5.00</b>
                               </td>
-                              <td><b>30 minutes</b></td>
-                              <td><b>1 user</b></td>
+                              <td>
+                                 <b>&#8369; 4.00</b>
+                              </td>
+                              <td><b>30 mins</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 10.00</b>
                               </td>
-                              <td><b>60 minutes</b></td>
-                              <td><b>1 user</b></td>
+                              <td>
+                                 <b>&#8369; 8.00</b>
+                              </td>
+                              <td><b>60 mins</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 15.00</b>
                               </td>
+                              <td>
+                                 <b>&#8369; 12.00</b>
+                              </td>
                               <td><b>3 hours</b></td>
-                              <td><b>1 user</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 20.00</b>
                               </td>
+                              <td>
+                                 <b>&#8369; 16.00</b>
+                              </td>
                               <td><b>6 hours</b></td>
-                              <td><b>1 user</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 30.00</b>
                               </td>
+                              <td>
+                                 <b>&#8369; 25.00</b>
+                              </td>
                               <td><b>12 hours</b></td>
-                              <td><b>1 user</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 50.00</b>
                               </td>
+                              <td>
+                                 <b>&#8369; 44.00</b>
+                              </td>
                               <td><b>3 days</b></td>
-                              <td><b>1 user</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 99.00</b>
                               </td>
+                              <td>
+                                 <b>&#8369; 92.00</b>
+                              </td>
                               <td><b>7 days</b></td>
-                              <td><b>2 users</b></td>
+                              <td><b>2</b></td>
                            </tr>
                            <tr class="card thead">
-                              <th colspan="3">CASH OPTION ONLY</th>
+                              <th colspan="4">CASH OPTION ONLY</th>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 150.00</b>
                               </td>
+                              <td>
+                                 <b>N/A</b>
+                              </td>
                               <td><b>14 days</b></td>
-                              <td><b>2 users</b></td>
+                              <td><b>2</b></td>
                            </tr>
                            <tr>
                               <td>
                                  <b>&#8369; 300.00</b>
                               </td>
+                              <td>
+                                 <b>N/A</b>
+                              </td>
                               <td><b>30 days</b></td>
-                              <td><b>3 users</b></td>
+                              <td><b>3</b></td>
                            </tr>
                         </tbody>
                         <tfoot>
                            <tr class="card tfoot">
-                              <th id="th-udp" colspan="3">
-                                 DISCLAIMER:
-                                 <li>
-                                    NOTE: Internet timer starts upon entering the
-                                    voucher code.
-                                 </li>
-                                 <li>
-                                    Automatic PAUSE timer is only applicable to hourly rates.
-                                 </li>
+                              <th id="th-udp" colspan="4">
+                                 <div id="rotatingText2">Timer starts upon entering the voucher code.</div>
+                                 
                               </th>
                            </tr>
                         </tfoot>
                      </table>
+
+                    <script>
+                        // Array of rotating text configurations
+                        const rotatingTexts = [
+                           {
+                              elementId: "rotatingText1",
+                              messages: [
+                                    "Enjoy seamless internet access!",
+                                    "Up to 20Mbps download/upload speed!",
+                                    "Check out our weekly & monthly plans!",
+                              ],
+                              currentIndex: 0 // Track the current index
+                           },
+                           {
+                              elementId: "rotatingText2",
+                              messages: [
+                                    "Timer starts upon entering the voucher code.",
+                                    "Pause timer only applies to 12 hours & below.",
+                                    "Disconnect from WiFi to pause your timer.",
+                              ],
+                              currentIndex: 0 // Track the current index
+                           }
+                        ];
+                  
+                        // Function to rotate text
+                        function rotateTexts() {
+                           rotatingTexts.forEach((textGroup) => {
+                              // Update the text content of the element
+                              const element = document.getElementById(textGroup.elementId);
+                              if (element) {
+                                    textGroup.currentIndex = (textGroup.currentIndex + 1) % textGroup.messages.length;
+                                    element.innerText = textGroup.messages[textGroup.currentIndex];
+                              }
+                           });
+                        }
+                  
+                        // Start rotating every 3 seconds
+                        setInterval(rotateTexts, 3000);
+                     </script>
+
+                     <button id="ewallet-pay-btn" class="button oper-section-item" type="button">
+                        <p>PAY USING GCASH</p>
+                     </button>
+
+                     <!-- Modal structure -->
+                     <div id="image-modal" class="modal">
+                        <div class="modal-content">
+                           <span class="close-button">&times;</span>
+                           <h2>SCAN QR CODE</h2>
+                        
+                           <!-- Scrollable images -->
+                           <div class="image-container">
+                              <img src="./img/qr/gcash-qrcode.png" alt="GCash QR Code" />
+                              <!-- Add more images as needed -->
+                           </div>
+
+                           <!-- Scrollable text for instructions -->
+                           <div class="instructions-container">
+                              <h4>How to Pay Using GCash</h4>
+                              <p>1. Connect to [WIFI NAME HERE]</p>
+                              <p>2. Open your GCash app</p>
+                              <p>3. Send amount to: [GCASH NUMBER]</p>
+                              <p>4. Get your voucher code via SMS</p>
+                              <p>5. Enter voucher code in the wifi portal</p>
+                              <p>6. Start using the internet. Enjoy!</p>
+                           </div>
+                        </div>
+                     </div>
                      <!-- End of Rates -->
+                     
                   </form>
                </div>
             </div>

@@ -124,3 +124,26 @@ function closePopup() {
   var popcheck = document.getElementById("popcheck");
   if (popcheck) popcheck.classList.remove("open-popup");
 }
+
+
+// Get references to the button, modal, and close button
+const ewalletButton = document.getElementById('ewallet-pay-btn');
+const modal = document.getElementById('image-modal');
+const closeButton = document.querySelector('.close-button');
+
+// Show the modal when the button is clicked
+ewalletButton.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+// Close the modal when the close button is clicked
+closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Close the modal if the user clicks outside the modal content
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});

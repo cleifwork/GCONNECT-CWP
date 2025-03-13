@@ -90,7 +90,7 @@ body.portal {
   -webkit-tap-highlight-color: transparent;
 }
 
-#rotatingText {
+#rotatingText1, #rotatingText2 {
   font-size: 13px;
 }
 
