@@ -75,11 +75,11 @@
   margin: 1px 0;
   line-height: 1.5;
   color: #555;
-  font-size: 12px !important;
+  font-size: 12px;
 }
 
-.instructions-container b {
-  margin: 5px 0;
+.instructions-container a {
+  margin: 1px 0;
   line-height: 1.5;
   color: #555;
   font-size: 12px;
