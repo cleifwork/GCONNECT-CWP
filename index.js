@@ -53,12 +53,6 @@ function handleSubmit(event) {
 
   if (!hintElement) return; // Ensure hint element exists
 
-  if (!voucherCode) {
-    hintElement.innerHTML = "Please enter a voucher code.";
-    openPopup(); // Show error popup
-    return;
-  }
-
   // Prepare authentication request payload
   var submitData = {
     authType: 3,
@@ -90,9 +84,12 @@ function handleSubmit(event) {
     hintElement.innerHTML = errorHintMap[data.errorCode] || "Unknown error";
 
     if (data.errorCode === 0) {
-      // Successful authentication, redirect to landing page
-      window.location.href = data.landingUrl;
-   } else {
+      // Successful authentication
+      openPopup(); // Show success popup
+      window.location.href = data.landingUrl; // Redirect to landing page
+      // Redirect to the Google Forms URL as the landing page
+      // window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScoL8tOp0aHgdL860lZOfnIjEo2xiypcCImhK3R8XB28Q2YQQ/viewform";
+    } else {
       isCommited = false; // Allow retries on failure
       openPopup(); // Show error popup
     }
@@ -124,7 +121,6 @@ function closePopup() {
   var popcheck = document.getElementById("popcheck");
   if (popcheck) popcheck.classList.remove("open-popup");
 }
-
 
 // Get references to the button, modal, and close button
 const ewalletButton = document.getElementById('ewallet-pay-btn');
