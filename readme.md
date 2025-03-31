@@ -1,5 +1,8 @@
 
 # GConnect Custom WiFi Portal (GCONNECT-CWP)
+> [!NOTE] 
+> _Only tested using Omada Cloud-Based Controller. Not guaranteed to work with SDN or OC200_
+
 **GConnect Custom WiFi Portal (GCONNECT-CWP)** is a custom captive portal designed for Omada controllers, providing a seamless and user-friendly interface for WiFi access. This portal is tailored to enhance the user experience with a visually appealing design and straightforward functionality.
 
 ## Interface Description
