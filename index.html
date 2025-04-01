@@ -12,14 +12,9 @@
       <link href="./css/reinvent.css" type="text/css" rel="stylesheet" />
       <link href="./css/style.css" type="text/css" rel="stylesheet" />
       <link href="./css/rate.css" type="text/css" rel="stylesheet" />
-      <!-- <link href="./css/contact.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/brand.css" type="text/css" rel="stylesheet" />
       <link href="./css/theme.css" type="text/css" rel="stylesheet" />
-      <!-- <link href="./css/popslide.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/popcheck.css" type="text/css" rel="stylesheet" />
-      <!-- <link href="./css/tagline.css" type="text/css" rel="stylesheet" /> -->
-      <!-- <link href="./css/auto-popup.css" type="text/css" rel="stylesheet" /> -->
-      <!-- <link href="./css/box.css" type="text/css" rel="stylesheet" /> -->
       <link href="./css/counter.css" type="text/css" rel="stylesheet" />
       <link href="./css/modal.css" type="text/css" rel="stylesheet" />
    </head>
@@ -101,7 +96,7 @@
                   </form>
 
                   <form action="#" class="sign-up-form">
-                     <h2 class="title-wifi-rates">Wi-Fi Rates</h2>
+                     <h2 class="title-wifi-rates">WiFi Rates</h2>
 
                      <!-- Start of Rates -->
                      <table id="rates" class="rates">
@@ -111,7 +106,7 @@
                               <th id="e-wallet">GCash</th>
                               <th>Time</th>
                               <th id="th-valid">    
-                                 <img src="./img/icon/username.png" alt="User Icon" width="15" height="15">
+                                 <img src="./img/icon/username.png" alt="User Icon" width="16" height="16">
                               </th>
                            </tr>
                         </thead>
@@ -184,7 +179,7 @@
                                  <b>&#8369; 92.00</b>
                               </td>
                               <td><b>7 days</b></td>
-                              <td><b>2</b></td>
+                              <td><b>1</b></td>
                            </tr>
                            <tr class="card thead">
                               <th colspan="4">CASH OPTION ONLY</th>
@@ -237,7 +232,7 @@
                               messages: [
                                     "Timer starts upon entering the voucher code.",
                                     "Pause timer only applies to 12 hours & below.",
-                                    "Disconnect from WiFi to pause your timer.",
+                                    "Turn off WiFi to pause your timer.",
                               ],
                               currentIndex: 0 // Track the current index
                            }
@@ -260,7 +255,7 @@
                      </script>
 
                      <button id="ewallet-pay-btn" class="button oper-section-item" type="button">
-                        <p>PAY USING GCASH</p>
+                        <p>PAY USING E-WALLET</p>
                      </button>
 
                      <!-- Modal structure -->
@@ -271,19 +266,21 @@
                         
                            <!-- Scrollable images -->
                            <div class="image-container">
+                              <!-- <img src="./img/qr/ssid-qrcode.png" alt="GSENDER WIFI QR Code" /> -->
                               <img src="./img/qr/gcash-qrcode.png" alt="GCash QR Code" />
+                              <!-- <img src="./img/qr/maya-qrcode.png" alt="Maya QR Code" /> -->
                               <!-- Add more images as needed -->
                            </div>
 
                            <!-- Scrollable text for instructions -->
                            <div class="instructions-container">
-                              <h4>How to Pay Using GCash</h4>
-                              <p>1. Connect to [WIFI NAME HERE]</p>
-                              <p>2. Open your GCash app</p>
-                              <p>3. Send amount to: [GCASH NUMBER]</p>
+                              <h4>How to Pay via E-Wallet</h4>
+                              <p>1. Connect to <b>[SENDER WIFI]</b></p>
+                              <p>2. Open your <b id="gcash">GCash</b> or <b id="maya">Maya</b> app</p>
+                              <p>3. Send amount to: <b>[GCASH NUMBER]</b></p>
                               <p>4. Get your voucher code via SMS</p>
-                              <p>5. Enter voucher code in the wifi portal</p>
-                              <p>6. Start using the internet. Enjoy!</p>
+                              <p>5. Connect to <b>[WIFI NAME]</b></p>
+                              <p>6. Enter voucher code in the wifi portal</p>
                            </div>
                         </div>
                      </div>
@@ -315,7 +312,6 @@
                <img src="img/register.svg" class="image" alt="" />
             </div>
          </div>
-
       </div>
 
       <!-- Start of Preloader JS -->

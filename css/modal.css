@@ -31,12 +31,12 @@
 
 /* Image container with scrollable area */
 .image-container {
-  max-height: 300px; /* Set maximum height for scrolling */
-  overflow-y: hidden; /* Enable vertical scrolling */
+  max-height: 220px; /* Set maximum height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between images */
+  gap: 20px; /* Space between images */
   padding-top: 10px;
 }
 
@@ -76,6 +76,24 @@
   line-height: 1.5;
   color: #555;
   font-size: 12px;
+}
+
+.instructions-container p b {
+  color: #0000ff; /* Change to your desired color */
+  font-weight: bold; /* Ensures it remains bold */
+  font-size: 12px; /* Adjust font size if needed */
+}
+
+#gcash {
+  color: #007dfe; /* Change to your desired color */
+  font-weight: bold; /* Ensures it remains bold */
+  font-size: 12px; /* Adjust font size if needed */
+}
+
+#maya {
+  color: #00a652; /* Change to your desired color */
+  font-weight: bold; /* Ensures it remains bold */
+  font-size: 12px; /* Adjust font size if needed */
 }
 
 .instructions-container a {
