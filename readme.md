@@ -34,7 +34,7 @@ The images showcase the interface of the GConnect Custom WiFi Portal, designed t
 
 ## Demo
 - [GConnect-CWP Demo](https://www.youtube.com/watch?v=lIO2C1KExVs)
-- [GConnect Installation & Configuration](https://www.youtube.com/watch?v=O_8u0-8A6Nk)
+- [GConnect-CWP Setup](https://www.youtube.com/watch?v=U1ewqCA91Gw)
 
 
 ## Authors
