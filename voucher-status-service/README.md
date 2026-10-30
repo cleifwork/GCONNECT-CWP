@@ -1,5 +1,7 @@
 # Windows 11 setup
 
+Controller version note: the operator confirmed OC200 V1.0 running **6.3.0.111** on October 30, 2026. Earlier setup testing was recorded on 6.2.14.12. A full post-upgrade regression test has not been separately recorded.
+
 Current version uses manual voucher entry; connection-based autofill is parked. The runtime files are `server.mjs`, `balance.mjs`, and `balance.html`, alongside your private `.env` and certificate. Test files are optional and run only with `node --test`; they are not loaded by the service.
 
 Guests can revisit `http://PC-IP:3080/balance` in a regular browser after authentication. Deploy `balance.html` alongside `server.mjs` and restart the service when updating. Bookmark that page; Android may close the captive login window after authentication. This standalone page needs a live Windows/phone test.

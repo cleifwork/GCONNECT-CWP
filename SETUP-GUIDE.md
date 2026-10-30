@@ -12,7 +12,9 @@ The custom portal opens a balance dialog and sends a request to a small Node.js 
 
 ## Tested environment and current limits
 
-This setup was verified with an OC200 V1 running Controller 6.2.14.12, an ER605, Omada EAPs, a Windows 11 computer, and an Android captive browser. Endpoint availability must be verified on other versions; Open API documentation for a Cloud-Based Controller alone does not establish local-controller support.
+**Current installed version:** OC200 V1.0 / Controller **6.3.0.111**, confirmed by the operator’s October 30, 2026 screenshot. The upgrade time relative to earlier tests was not established. Retain the earlier version below as historical context; verify portal login, balance lookup before/after authentication, and certificate trust following an upgrade before claiming full compatibility.
+
+Earlier setup verification was recorded with an OC200 V1 running Controller 6.2.14.12, an ER605, Omada EAPs, a Windows 11 computer, and an Android captive browser. Endpoint availability must be verified on other versions; Open API documentation for a Cloud-Based Controller alone does not establish local-controller support.
 
 Working: local API authentication, certificate verification, voucher lookup, guest access before authentication on the test SSID, and the portal balance form. The revised dialog layout still needs testing on each target phone/browser.
 
@@ -310,7 +312,7 @@ The service currently permits one active lookup at a time, has bounded paginatio
 
 Portal timer information: an info button beside the login heading opens a scrollable timer/pause dialog. Include `timer-info.js` in the portal package. Its eligibility text reflects this operator's policy (eligible hourly packages up to 12 hours); it does not configure Omada timing. Verify voucher-group timing and pause behavior before sharing or applying to other sites. Disconnect detection may delay pausing. Balance checks do not activate vouchers.
 
-We tested a voucher remaining-time checker with OC200 V1 / Controller 6.2.14.12. Guests can check a code from the custom portal without activating it. A small local Node.js service uses the controller's documented Open API; credentials stay on the host. The important setup details were a matching trusted controller certificate, guest-to-service firewall access, a pre-authentication /32 exception followed by Apply, and allowing the actual portal origin including port 8088. Live SSID balance access was also verified with Guest Network enabled using the narrow EAP Permit exception. Comprehensive isolation and automatic startup must still be verified for each installation. This is a community integration, not a TP-Link product, and support depends on firmware/API availability.
+We built a voucher remaining-time checker for OC200 V1. The operator currently runs Controller 6.3.0.111; earlier setup testing was recorded on 6.2.14.12. Guests can check a code from the custom portal without activating it. A small local Node.js service uses the controller's documented Open API; credentials stay on the host. The important setup details were a matching trusted controller certificate, guest-to-service firewall access, a pre-authentication /32 exception followed by Apply, and allowing the actual portal origin including port 8088. Live SSID balance access was also verified with Guest Network enabled using the narrow EAP Permit exception. Comprehensive isolation and automatic startup must still be verified for each installation. This is a community integration, not a TP-Link product, and support depends on firmware/API availability.
 
 Share the source, this guide, and a sanitized portal package. Never share a configured .env, API tokens, certificate private keys, or PFX files.
 

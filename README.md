@@ -1,7 +1,7 @@
 # GConnect Custom WiFi Portal — OC200 (OC-GCONNECT)
 
 > [!NOTE]
-> Tested with an OC200 V1 running Omada Controller **6.2.14.12**, an ER605, EAP225 access points, Windows 11, and an Android phone. Compatibility with other controller versions and hardware must be verified. The original Cloud-Based Controller project remains on the `main` branch.
+> Current controller: **OC200 V1.0 / Omada Controller 6.3.0.111**, confirmed by the operator’s screenshot on October 30, 2026. Earlier setup testing was recorded on **6.2.14.12**, with an ER605, EAP225 access points, Windows 11, and an Android phone. The upgrade timing relative to those tests was not recorded; the screenshot confirms the installed version, not a full post-upgrade regression test. Compatibility with other controller versions and hardware must be verified. The original Cloud-Based Controller project remains on the `main` branch.
 
 **OC-GCONNECT** is a custom captive portal for voucher-based WiFi access, with rates, e-wallet instructions, and a remaining-time checker.
 
@@ -29,7 +29,14 @@ The **portal is hosted by the OC200**. The **balance checker uses a separate loc
 
 ## Demo
 
-Use a configured test SSID to preview the complete login and balance flow. A local HTML preview shows the interface but cannot validate OC200 authentication or live API behavior. No OC200-specific demo video is linked yet.
+| Video | Link |
+|---|---|
+| OC200 portal demo | Coming soon |
+| OC200 portal and balance-service setup | Coming soon |
+
+<!-- Replace “Coming soon” with the published OC200-specific video links. -->
+
+Use a configured test SSID to preview the complete login and balance flow. A local HTML preview shows the interface but cannot validate OC200 authentication or live API behavior.
 
 ## Authors
 
@@ -104,7 +111,19 @@ These tests do not contact a live OC200 and are not loaded during normal service
 
 ## Screenshots
 
-OC200 screenshots can be added here after removing voucher codes and private installation details. The interface descriptions above reflect this branch; screenshots from `main` may show a different portal implementation.
+| View | Preview |
+|---|---|
+| Voucher login — light mode | Screenshot coming soon |
+| Voucher login — dark mode | Screenshot coming soon |
+| WiFi rates | Screenshot coming soon |
+| E-wallet payment instructions | Screenshot coming soon |
+| Remaining-time dialog | Screenshot coming soon |
+| Standalone balance page | Screenshot coming soon |
+
+<!-- Add sanitized images under docs/screenshots/ and replace the placeholders
+with Markdown images, for example: ![Voucher login in dark mode](docs/screenshots/login-dark.png).
+Do not publish usable voucher codes, API credentials, or private installation details.
+Use screenshots from this OC200 branch rather than the Cloud-Based Controller version. -->
 
 ## Support
 
