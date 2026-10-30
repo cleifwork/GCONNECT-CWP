@@ -111,19 +111,21 @@ These tests do not contact a live OC200 and are not loaded during normal service
 
 ## Screenshots
 
-| View | Preview |
-|---|---|
-| Voucher login — light mode | Screenshot coming soon |
-| Voucher login — dark mode | Screenshot coming soon |
-| WiFi rates | Screenshot coming soon |
-| E-wallet payment instructions | Screenshot coming soon |
-| Remaining-time dialog | Screenshot coming soon |
-| Standalone balance page | Screenshot coming soon |
+Mobile samples captured on the GTEST WIFI test SSID, plus the standalone balance page. Prices and payment instructions shown are examples from this installation.
 
-<!-- Add sanitized images under docs/screenshots/ and replace the placeholders
-with Markdown images, for example: ![Voucher login in dark mode](docs/screenshots/login-dark.png).
-Do not publish usable voucher codes, API credentials, or private installation details.
-Use screenshots from this OC200 branch rather than the Cloud-Based Controller version. -->
+| Login — light mode | Login — dark mode |
+|:---:|:---:|
+| <a href="docs/screenshots/login-light.jpg"><img src="docs/screenshots/login-light.jpg" width="280" alt="Voucher login in light mode"></a> | <a href="docs/screenshots/login-dark.jpg"><img src="docs/screenshots/login-dark.jpg" width="280" alt="Voucher login in dark mode"></a> |
+
+| WiFi rates | E-wallet instructions |
+|:---:|:---:|
+| <a href="docs/screenshots/wifi-rates.jpg"><img src="docs/screenshots/wifi-rates.jpg" width="280" alt="WiFi rates table"></a> | <a href="docs/screenshots/ewallet-guide.jpg"><img src="docs/screenshots/ewallet-guide.jpg" width="280" alt="E-wallet payment guide with copy-number button"></a> |
+
+| Remaining-time dialog | Standalone balance page |
+|:---:|:---:|
+| <a href="docs/screenshots/balance-dialog.jpg"><img src="docs/screenshots/balance-dialog.jpg" width="280" alt="Voucher balance dialog showing expired status"></a> | <a href="docs/screenshots/balance-page.jpg"><img src="docs/screenshots/balance-page.jpg" width="280" alt="Standalone balance page showing an active multi-day voucher"></a> |
+
+Click an image to view the full-size JPEG. These documentation assets are excluded from the static portal ZIP build command above.
 
 ## Support
 
