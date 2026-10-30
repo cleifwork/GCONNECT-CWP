@@ -115,17 +115,17 @@ Mobile samples captured on the GTEST WIFI test SSID, plus the standalone balance
 
 | Login — light mode | Login — dark mode |
 |:---:|:---:|
-| <a href="docs/screenshots/login-light.jpg"><img src="docs/screenshots/login-light.jpg" width="280" alt="Voucher login in light mode"></a> | <a href="docs/screenshots/login-dark.jpg"><img src="docs/screenshots/login-dark.jpg" width="280" alt="Voucher login in dark mode"></a> |
+| <a href="docs/screenshots/login-light.jpg"><img src="docs/screenshots/login-light-phone.png" width="280" alt="Voucher login in light mode"></a> | <a href="docs/screenshots/login-dark.jpg"><img src="docs/screenshots/login-dark-phone.png" width="280" alt="Voucher login in dark mode"></a> |
 
 | WiFi rates | E-wallet instructions |
 |:---:|:---:|
-| <a href="docs/screenshots/wifi-rates.jpg"><img src="docs/screenshots/wifi-rates.jpg" width="280" alt="WiFi rates table"></a> | <a href="docs/screenshots/ewallet-guide.jpg"><img src="docs/screenshots/ewallet-guide.jpg" width="280" alt="E-wallet payment guide with copy-number button"></a> |
+| <a href="docs/screenshots/wifi-rates.jpg"><img src="docs/screenshots/wifi-rates-phone.png" width="280" alt="WiFi rates table"></a> | <a href="docs/screenshots/ewallet-guide.jpg"><img src="docs/screenshots/ewallet-guide-phone.png" width="280" alt="E-wallet payment guide with copy-number button"></a> |
 
 | Remaining-time dialog | Standalone balance page |
 |:---:|:---:|
-| <a href="docs/screenshots/balance-dialog.jpg"><img src="docs/screenshots/balance-dialog.jpg" width="280" alt="Voucher balance dialog showing expired status"></a> | <a href="docs/screenshots/balance-page.jpg"><img src="docs/screenshots/balance-page.jpg" width="280" alt="Standalone balance page showing an active multi-day voucher"></a> |
+| <a href="docs/screenshots/balance-dialog.jpg"><img src="docs/screenshots/balance-dialog-phone.png" width="280" alt="Voucher balance dialog showing expired status"></a> | <a href="docs/screenshots/balance-page.jpg"><img src="docs/screenshots/balance-page-phone.png" width="280" alt="Standalone balance page showing an active multi-day voucher"></a> |
 
-Click an image to view the full-size JPEG. These documentation assets are excluded from the static portal ZIP build command above.
+Screenshots are presented in a phone frame. Click an image to view the original full-size JPEG. These documentation assets are excluded from the static portal ZIP build command above.
 
 ## Support
 
