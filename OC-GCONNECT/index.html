@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1465d8">
+  <title>GConnect WiFi</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="overrides.css">
+</head>
+<body class="portal">
+  <main class="portal-shell">
+    <section class="marketing-panel" aria-label="GConnect information">
+      <div class="marketing-copy">
+        <p class="eyebrow">GConnect Feeds</p>
+        <h1>Stay connected<br>to what matters.</h1>
+        <p>Fast, simple WiFi access for work, play, and everything in between.</p>
+        <button id="show-rates" class="outline-button" type="button">See rates</button>
+      </div>
+      <div class="wifi-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+    <section class="login-panel">
+      <div class="login-card">
+        <div id="login-view">
+          <div class="brand-lockup"><img class="brand-image" src="logo.png" alt="Omada"><span class="brand-name">GCONNECT WIFI</span></div>
+          <p id="maingreeting" class="greeting">Welcome!</p>
+          <div class="auth-card">
+            <p id="oper-hint" class="status-message" role="status" aria-live="polite"></p>
+            <div class="auth-heading"><h2>Stream, Play &amp; Enjoy</h2><button id="open-timer-info" type="button" aria-label="Voucher timer and pause information"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7h.01"></path></svg></button></div>
+            <p id="rotating-text" class="subheading">Enjoy seamless internet access.</p>
+            <form id="login-form" novalidate>
+              <div id="input-voucher" class="input-container voucher-field"><span class="icon left-icon voucher-icon" aria-hidden="true"></span><input id="voucherCode" class="oper-section-item input" name="voucherCode" type="text" placeholder="Enter voucher code" autocomplete="off"></div>
+              <div id="input-user" class="input-container"><span class="icon left-icon user" aria-hidden="true"></span><input id="username" class="oper-section-item input" name="username" type="text" placeholder="Username" autocomplete="username"></div>
+              <div id="input-password" class="input-container hidden"><span class="icon left-icon lock" aria-hidden="true"></span><input id="password" class="password oper-section-item input" name="password" type="password" placeholder="Password" autocomplete="current-password"><span class="icon toggle-visibility" role="button" tabindex="0" aria-label="Show password"></span></div>
+              <div id="input-simple" class="input-container hidden"><span class="icon left-icon lock" aria-hidden="true"></span><input id="simplePassword" class="password oper-section-item input" name="simplePassword" type="password" placeholder="Password"><span class="icon toggle-visibility" role="button" tabindex="0" aria-label="Show password"></span></div>
+              <div id="input-phone-num" class="phone-fields"><input id="country-code" class="input oper-section-item" inputmode="numeric" placeholder="Code"><input id="phone-number" class="input oper-section-item" name="phone-number" type="tel" inputmode="tel" placeholder="Phone number"></div>
+              <div id="input-verify-code" class="verify-fields"><input id="verify-code" class="input oper-section-item" name="verify-code" type="text" inputmode="numeric" placeholder="Verification code"><button id="get-code" class="secondary-button" type="button">Get code</button></div>
+              <input name="clientMac" id="cMac" type="hidden"><input name="radiusSvrIp" id="radiusServerIp" type="hidden">
+            </form>
+            <button id="button-login" class="button oper-section-item" type="button">GCONNECT</button>
+            <button id="open-voucher-status" class="status-open" type="button"><svg class="status-clock" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span>Check remaining time</span></button>
+            <button id="hotspot-other-login" class="other-methods" type="button">Other login methods</button>
+          </div>
+          <p class="copyright">GConnect Solutions @ 2027</p>
+        </div>
+        <div id="rates-view" hidden>
+          <h2 class="rates-title">GConnect WiFi Rates</h2><p class="rates-intro">Choose the plan that fits your day.</p>
+          <table class="rates-table"><thead><tr><th>Cash</th><th>GCash</th><th>Time</th><th>Users</th></tr></thead><tbody>
+            <tr><td>₱5</td><td>₱4</td><td>30 mins</td><td>1</td></tr><tr><td>₱10</td><td>₱8</td><td>60 mins</td><td>1</td></tr><tr><td>₱15</td><td>₱12</td><td>3 hours</td><td>1</td></tr><tr><td>₱20</td><td>₱16</td><td>6 hours</td><td>1</td></tr><tr><td>₱30</td><td>₱25</td><td>12 hours</td><td>1</td></tr><tr><td>₱50</td><td>₱44</td><td>3 days</td><td>1</td></tr><tr><td>₱99</td><td>₱92</td><td>7 days</td><td>1</td></tr><tr><td>₱150</td><td>—</td><td>14 days</td><td>2</td></tr><tr><td>₱300</td><td>—</td><td>30 days</td><td>3</td></tr>
+          </tbody></table>
+          <p class="rates-note">Timer starts when the voucher is redeemed.</p><button id="show-payment" class="button payment-button" type="button">Pay using E-Wallet</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="payment-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="payment-title"><div class="modal-card"><button class="modal-close" type="button" aria-label="Close">×</button><h2 id="payment-title">Pay using E-Wallet</h2><p class="payment-subtitle">GCash or Maya</p><div class="payment-destination"><span class="payment-label">Send payment to</span><div class="payment-number-row"><strong id="payment-number">0918 765 4321</strong><button id="copy-payment-number" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg>Copy</button></div><span id="payment-copy-status" role="status" aria-live="polite"></span></div><ol class="payment-steps"><li>Connect to <b>GSENDER WIFI</b>.</li><li>Open <b>GCash or Maya</b> and send payment.</li><li>Receive your voucher via <b>SMS</b>.</li><li>Return to <b>GCONNECT WIFI</b> and enter your voucher.</li></ol></div></div>
+  <div id="hotspot-selector"><div class="selector-title"><span>Other Login Methods</span><button id="hotspot-selector-close" type="button" aria-label="Close">×</button></div></div>
+  <div id="form-auth-msg"><div id="form-auth-outer"><button id="form-auth-close" type="button" aria-label="Close">×</button><div id="form-auth-inner"><div id="form-auth-header"><div id="form-auth-title"></div><div id="form-auth-note"></div></div><div id="form-auth-content"></div><div id="form-auth-footer"><a id="form-auth-submit" href="javascript:void(0);">Submit</a></div></div></div></div>
+  <dialog id="voucher-status-dialog" class="status-dialog" aria-labelledby="status-title">
+    <button id="close-voucher-status" class="status-close" type="button" aria-label="Close balance checker">×</button>
+    <h2 id="status-title">Remaining WiFi time</h2>
+    <p class="status-intro">Check your voucher without activating it.</p>
+    <form id="voucher-status-form"><label for="status-voucher-code">Voucher code</label><div id="status-voucher-field" class="input-container voucher-field"><span class="icon left-icon voucher-icon" aria-hidden="true"></span><input id="status-voucher-code" class="oper-section-item input" placeholder="Enter voucher code" autocomplete="off" autocapitalize="off" spellcheck="false" autofocus required maxlength="64"></div><button type="submit">Check balance</button></form>
+    <div id="voucher-status-result" role="status" aria-live="polite"><strong id="status-duration"></strong><span id="status-badge"></span><p id="status-message"></p></div>
+  </dialog>
+  <dialog id="timer-info-dialog" class="status-dialog timer-info" aria-labelledby="timer-info-title"><button id="close-timer-info" class="status-close" type="button" aria-label="Close timer information">×</button><h2 id="timer-info-title">Voucher timer &amp; pause</h2><p class="status-intro">Know how your WiFi time works.</p><ul><li><b>When time starts.</b> Your timer starts after a successful voucher login. Checking your balance does not activate it.</li><li><b>Which plans can pause.</b> Automatic pause/resume is available on eligible hourly plans of <b>12 hours or less</b>.</li><li><b>How to pause.</b> Turn off WiFi or disconnect from GCONNECT WIFI. A pause may take a moment while the network detects the disconnection.</li><li><b>How to resume.</b> Reconnect using the same active voucher to continue using its remaining time.</li><li><b>Other plans.</b> Plans without pause support keep counting down after activation, even while disconnected.</li><li><b>When time runs out.</b> Internet access ends and the expired voucher can no longer be used.</li></ul><button id="timer-info-done" class="button" type="button">Got it</button></dialog>
+  <script src="jquery.min.js"></script><script src="index.js"></script><script src="voucher-status.js"></script><script src="payment.js"></script><script src="timer-info.js"></script>
+  <script>
+    (function () {
+      var messages=['Enjoy seamless internet access.','Up to 20Mbps download/upload speed!','Check our weekly and monthly plans!'], messageIndex=0, rotatingText=document.getElementById('rotating-text');
+      window.setInterval(function(){messageIndex=(messageIndex+1)%messages.length;rotatingText.textContent=messages[messageIndex];},3000);
+      var hour=new Date().getHours();document.getElementById('maingreeting').textContent=hour<12?'Good morning!':hour<18?'Good afternoon!':'Good evening!';
+      var login=document.getElementById('login-view'),rates=document.getElementById('rates-view'),ratesButton=document.getElementById('show-rates');
+      function showLogin(){rates.hidden=true;login.hidden=false;ratesButton.textContent='SEE RATES';ratesButton.onclick=showRates;}
+      function showRates(){login.hidden=true;rates.hidden=false;ratesButton.textContent='Back to Login';ratesButton.onclick=showLogin;}
+      ratesButton.onclick=showRates;
+      var modal=document.getElementById('payment-modal');document.getElementById('show-payment').onclick=function(){modal.hidden=false;};document.querySelector('.modal-close').onclick=function(){modal.hidden=true;};modal.onclick=function(event){if(event.target===modal)modal.hidden=true;};
+    }());
+  </script>
+</body></html>

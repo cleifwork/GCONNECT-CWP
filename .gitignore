@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+*.key
+*.cer
+*.crt
+node_modules/
+*.log
+*.bak
+*.zip
+.DS_Store
+Thumbs.db

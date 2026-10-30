@@ -1,0 +1,263 @@
+#payment-modal{background:rgba(3,14,30,.76)}
+#payment-modal .modal-card{max-height:85dvh;overflow:auto;border:1px solid #b6c9e2;background:#fff;padding:30px 24px 24px;border-radius:22px}
+#payment-modal .modal-close{width:44px;height:44px;right:4px;top:4px}
+#payment-modal h2{font-size:23px;margin:12px 0 6px;text-align:center}
+#payment-modal .payment-subtitle{text-align:center;margin:0 0 20px;font-size:14px}
+.payment-destination{padding:16px;border:1px solid #b6c9e2;border-radius:14px;background:#f1f6ff}
+.payment-label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#526783}
+.payment-number-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+#payment-number{font-size:22px;white-space:nowrap;font-variant-numeric:tabular-nums;user-select:text;-webkit-user-select:text}
+#copy-payment-number{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 10px;border:1px solid #a8bfdf;border-radius:10px;background:transparent;color:#1465d8;font-size:13px;font-weight:700}
+#payment-copy-status{display:block;font-size:12px;margin-top:6px;color:#1465d8}
+.payment-steps{padding-left:22px;margin:20px 0 0;font-size:14px;line-height:1.55}.payment-steps li+li{margin-top:10px}
+@media(max-width:360px){.payment-number-row{flex-direction:column;align-items:stretch}#payment-number{text-align:center}#copy-payment-number{width:100%}}
+@media(prefers-color-scheme:dark){#payment-modal .modal-card{background:#0c1e34;color:#e7efff;border-color:#466381}.payment-destination{background:#102a47;border-color:#466381}.payment-label{color:#aebed4}#copy-payment-number,#payment-copy-status{color:#a5cdff}}
+#status-badge[data-status="unused"]:not(:empty){background:#e2f5e9;color:#126338}
+#status-badge[data-status="active"]:not(:empty){background:#e1efff;color:#145da8}
+#status-badge[data-status="expired"]:not(:empty){background:#fbe7e7;color:#a53030}
+#status-badge[data-status="unknown"]:not(:empty){background:#edf0f3;color:#535f6d}
+@media(prefers-color-scheme:dark){#status-badge[data-status="unused"]:not(:empty){background:#173c2c;color:#86e3ad}#status-badge[data-status="active"]:not(:empty){background:#163b58;color:#83caff}#status-badge[data-status="expired"]:not(:empty){background:#48272e;color:#ffacac}#status-badge[data-status="unknown"]:not(:empty){background:#303b48;color:#c6ced8}}
+.auth-heading{position:relative;padding-right:28px}.auth-heading h2{font-size:23px}#open-timer-info{position:absolute;right:-8px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:#1465d8;cursor:pointer}
+.timer-info ul{padding-left:20px;margin:20px 0;font-size:14px;line-height:1.55}.timer-info li+li{margin-top:12px}.timer-info li{color:#526783}.timer-info b{color:#10213d}
+@media(prefers-color-scheme:dark){#open-timer-info{color:#a5cdff}.timer-info li{color:#aebed4}.timer-info b{color:#e7efff}}
+.status-message.success{color:#086147;background:#e4f6ee}
+@media(prefers-color-scheme:dark){.status-message.success{color:#99edc4;background:#123e33}}
+.status-open{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:12px;border:1px solid #a8bfdf;border-radius:13px;background:transparent;color:#1465d8;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.status-clock{width:22px;height:22px;flex:0 0 22px}
+.status-dialog{width:calc(100% - 32px);max-width:390px;max-height:85dvh;overflow:auto;padding:30px 24px 24px;border:1px solid #dfe6f1;border-radius:22px;background:#fff;color:#10213d;box-shadow:0 24px 80px #0005}
+.status-dialog::backdrop{background:rgba(3,14,30,.72)}
+.status-dialog h2{text-align:center;font-size:22px;margin:4px 0 8px}.status-intro{text-align:center;color:#6b7890;font-size:13px;margin:0 0 20px}
+.status-close{position:absolute;right:12px;top:10px;border:0;background:transparent;color:inherit;font-size:26px;cursor:pointer}
+#voucher-status-result{text-align:center;margin-top:20px}#status-duration{display:block;font-size:38px;line-height:1.2;letter-spacing:-.04em}#status-badge:not(:empty){display:inline-block;margin-top:10px;border-radius:20px;padding:5px 12px;background:#e8f1ff;color:#0d4cae;font-size:12px;font-weight:700}#status-message{font-size:14px;color:#6b7890;margin-bottom:0}
+@media(prefers-color-scheme:dark){.status-dialog{background:#0c1e34;color:#e7efff;border-color:#294665}.status-open{color:#a5cdff;border-color:#365372}.status-intro,#status-message{color:#aebed4}#status-badge:not(:empty){background:#17375d;color:#a5cdff}}
+.voucher-status-panel { max-width: 400px; margin: 20px auto; padding: 16px; color: #1465d8; }
+.voucher-status-panel summary { cursor: pointer; text-align: center; }
+#voucher-status-form { display: grid; gap: 10px; margin-top: 14px; }
+#voucher-status-form button { padding: 12px; border: 1px solid #8da6c7; border-radius: 10px; font: inherit; }
+#voucher-status-form button { background: #1465d8; color: white; }
+@media(prefers-color-scheme:dark) { .voucher-status-panel { color: #a5cdff; } }
+/* Keep the initial voucher page uncluttered before OC200 returns its portal settings. */
+#input-user,
+#input-password,
+#input-simple,
+#input-phone-num,
+#input-verify-code {
+  display: none;
+}
+
+/* This GConnect design exposes the voucher-only journey, even if OC200 offers Hotspot choices. */
+#hotspot-other-login {
+  display: none !important;
+}
+
+/* The mobile captive browser focuses the input while its wrapper also has a border.
+   Keep the focus ring on the wrapper only, avoiding the doubled rounded rectangle. */
+.input-container:focus-within,
+.phone-fields:focus-within,
+.verify-fields:focus-within {
+  border-color: #1465d8;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(20, 101, 216, 0.14);
+}
+
+.input-container .input:focus,
+.phone-fields .input:focus,
+.verify-fields .input:focus {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Compact brand treatment for the rates screen. */
+.rates-title {
+  color: #0d4cae;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.rates-title::after {
+  content: "";
+  display: block;
+  width: 38px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: #1465d8;
+}
+
+.rates-intro {
+  max-width: 260px;
+  margin: 12px auto 20px;
+  color: #6b7890;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+  .rates-title {
+    font-size: 22px;
+    letter-spacing: 0.045em;
+  }
+}
+
+/* Reuses the original CBC voucher artwork, embedded so it is included in the OC200 upload. */
+.voucher-icon {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYEAYAAACw5+G7AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAAAGAAAABgAPBrQs8AAAAHdElNRQfnDAcPESD8WRDHAAAE9ElEQVRYw82We0xTZxjGn/e0lqCdJpTLZlCQTXS6qEMFwfsm475KdSBjW0xAByqJYReCgW0q0ykCc9N4QY1RotzR2BYJTqsLpYkBxWwBKhZivCBOZ5QAEU7f/bPTJZAG6qXs+fO87/Od3/N93/nOR3hBnQ05G1LrNnGi2CqrEJdmZXE7CjlToZCHy8KB3Fy1MSIwIrC19UXHH6nIUYPerDfrzePH9120Fgmzrl6FJwK5yt/f1hBA3+FAdzfXWqN4SnLyqnUx2yP3lpS8rgCCo4Y+b+sJITY7ewi4pEbehlSlklQUROHFxZUWbVj17fz8/02AAS21iO/m5aENsynh2bPh+qmcLnGf1Vr1jW7+ec+EBGnrjVqAuLio8qjyzk4AmTz/4kW7jSX4AF8/eICjsMhSDAYO5aNsOnnSapGlDtxpaKjYoCvXlS9Z8rIBHP4GJFWt1blW39Lp+GMugzky0uEBatAEy8AAGdiX8jMyVrZEfxrWVlBARETE/NoCVLyn1Wq1fn50GIvlq5qb0Ynf+YxCQRuRg339/RhP5UKvRsMC/2xdU1yMH7EMk8aNG3ZgBoPLymR54s7nOUlJaqPaqDaOYIsOAdRr9+rNmzdjHx2SLWtqgi+2DfxisdCH7CKMDQyED36Dd34+bmMF7np724xneRH+zs2FlnqpTKlEIRp4fWqqwyvTh0e0tbnZ6s97aa1Gs3peTGNYSkvLsAEqN2jH6s2JiViBUrpVVOTwi5WYjGmiiG7cRqtM5rB/sKRD4m1c51NJSZpV0TERkWVl9gOozgWcjw0I4GucwyEymdAgWIVZVqutUSX4i1N6e2WbxTXimq6ugWzaptjp4/PSoCPVSjo+UCiK8rlWi9ViNsc0xjTGNPb0UBXrVutWz5nD0fyDrK62Fkno4GPu7kOSZtKvkN24gZ84DVn79zMD2HrokNMCSByfoRGqhw95OS8U1oeGCkjhJuF5ero9cEk8mYHpcjluQs9Fr2CLvKC4CAF45OGBI8IOXp6eLvBOZGK6m9uwzlSk4c8ZM7gbCaTcs2e0Atjkwok8RqUSKBgHMOnOHdsxaEe2+kY8obDOztHiljgkbiG2NfpqRFpKijBFFOT1vr70Jc7Q6StXBhs5GAFU39JCRhC77trldPJ+Oo7wy5f5ufwtUvj42LilutqoNoY+vnevfz89EXvi4zGVvqAtvb22AT6CO3pcXHCAZ1Okq6vTwK9jAmb39Mg3iZcVQfHxmkfhVeFV9+/bVsSer1Kl3XI+1mRCIUJ4fVCQ02dcUijWYbHJpHkj+n6EMjh4cNn+ZW4DDJzo5TV4Jmg3sjHv2jWnBejBYQr29LRXHhLA9kd+H1swztdXek4llIM/2tqQge2IOnjQaQHqQLzbz0+6jg8uyyvy9Yv0ixYuFEzWz4X2+HgW8RfX/nuH8fuvka/wJvpKqcQM5OAdLy8UImvEV8ZXIH7KK/n7EycqTdr2apcFC9goTOfjpaVU+Vh7rPpbrRYGeGJ5VJQTmV5Oy9CFSzqdQG6YiQWiOKxhBzqgfPpUOs5Gm1/iFvgx5cJUXz+s4RmdQ29HByl4LYJOnRrtAKhBGNXU1ckflnpleHySl+dxuvNB1wRmzESckLJ0KV1HKc8aM0bq55ucRkcsFiRjLkLv3qVpaOCaCxecxctzEEc3+vtJDQWmGgxd7W/WuicXFPwDUlYhO1SHnsAAAAAASUVORK5CYII=");
+}
+
+/* Keep the voucher form above the fold on captive-portal mobile browsers. */
+@media (max-width: 760px) {
+  .marketing-panel {
+    min-height: 138px;
+    padding: 20px 24px;
+  }
+
+  .marketing-panel .eyebrow {
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+
+  .marketing-panel h1 {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .marketing-panel p:not(.eyebrow) {
+    display: none;
+  }
+
+  .marketing-panel .outline-button {
+    margin-top: 9px;
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+
+  .wifi-orbit {
+    width: 220px;
+    height: 220px;
+    right: -80px;
+    bottom: -125px;
+  }
+}
+
+/* Original lightweight GConnect Feeds gradient. */
+.marketing-panel {
+  background: linear-gradient(140deg, #0b4fb9, #1465d8 53%, #62a7ff);
+}
+
+/* Replace the previous circular decoration with an oversized Wi-Fi signal. */
+.wifi-orbit {
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='none' stroke='white' stroke-linecap='round'%3E%3Cg opacity='.24' stroke-width='28'%3E%3Cpath d='M78 223c98-98 258-98 356 0'/%3E%3Cpath d='M139 285c64-64 170-64 234 0'/%3E%3Cpath d='M201 347c30-30 80-30 110 0'/%3E%3C/g%3E%3Ccircle cx='256' cy='408' r='17' fill='white' fill-opacity='.24' stroke='none'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.wifi-orbit span {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e7efff;
+    background: #071322;
+  }
+
+  .login-panel {
+    background: radial-gradient(circle at top right, #17375d, transparent 45%), #071322;
+  }
+
+  .auth-card,
+  .modal-card,
+  #form-auth-outer {
+    border-color: #294665;
+    color: #e7efff;
+    background: rgba(12, 30, 52, 0.96);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .greeting,
+  .copyright,
+  .subheading,
+  .rates-intro,
+  .rates-note,
+  .modal-card p,
+  .modal-card li {
+    color: #aebed4;
+  }
+
+  .input-container,
+  .phone-fields,
+  .verify-fields {
+    border-color: #365372;
+    background: #102a47;
+  }
+
+  .input,
+  .input-container .input:focus,
+  .phone-fields .input:focus,
+  .verify-fields .input:focus {
+    color: #f3f7ff;
+  }
+
+  .input::placeholder {
+    color: #9eb0c9;
+  }
+
+  /* Some Android captive browsers retain native light input paint without explicit overrides. */
+  #status-voucher-field,
+  #input-voucher,
+  #input-user,
+  #input-password,
+  #input-simple,
+  #input-phone-num,
+  #input-verify-code {
+    background-color: #102a47 !important;
+  }
+
+  #status-voucher-field .input,
+  #input-voucher .input,
+  #input-user .input,
+  #input-password .input,
+  #input-simple .input,
+  #input-phone-num .input,
+  #input-verify-code .input {
+    color: #f5f9ff !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: #f5f9ff;
+  }
+
+  #status-voucher-field .input::placeholder,
+  #input-voucher .input::placeholder,
+  #input-user .input::placeholder,
+  #input-password .input::placeholder,
+  #input-simple .input::placeholder,
+  #input-phone-num .input::placeholder,
+  #input-verify-code .input::placeholder {
+    color: #c4d2e6 !important;
+    opacity: 1;
+    -webkit-text-fill-color: #c4d2e6;
+  }
+
+  .rates-title {
+    color: #7eb7ff;
+  }
+
+  .rates-table {
+    border-color: #365372;
+  }
+
+  .rates-table td {
+    border-color: #365372;
+    color: #e7efff;
+    background: #0d2139;
+  }
+
+  .rates-table tr:nth-child(even) td {
+    background: #102a47;
+  }
+}
+
+/* Keep multi-day balance results readable in narrow phone dialogs. */
+#status-duration{font-size:clamp(22px,6vw,38px);overflow-wrap:break-word}
