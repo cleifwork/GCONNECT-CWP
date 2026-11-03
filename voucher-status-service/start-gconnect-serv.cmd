@@ -26,13 +26,18 @@ if errorlevel 1 (
   goto failed
 )
 :node_ready
-rem Respect an existing custom CA path, or use the certificate next to this file.
-if not defined NODE_EXTRA_CA_CERTS set "NODE_EXTRA_CA_CERTS=%CD%\oc200-cert.pem"
+rem Explicitly trust the current controller certificate; override stale inherited paths.
+set "GCONNECT_CERT_DIR=%~dp0..\certs"
+for %%I in ("%GCONNECT_CERT_DIR%") do set "GCONNECT_CERT_DIR=%%~fI
+
+set "NODE_EXTRA_CA_CERTS=%GCONNECT_CERT_DIR%\gconnect-trust-cert.pem"
 if not exist "%NODE_EXTRA_CA_CERTS%" (
   echo Controller certificate PEM not found.
-  echo Put oc200-cert.pem beside this launcher, or set NODE_EXTRA_CA_CERTS first.
+  echo Expected: "%NODE_EXTRA_CA_CERTS%"
+  echo Run the GConnect certificate helper, then keep gconnect-trust-cert.pem in C:\GConnect\certs.
   goto failed
 )
+echo Controller trust certificate: "%NODE_EXTRA_CA_CERTS%"
 echo Starting GConnect. Leave this window open; locking Windows is fine.
 echo Press Ctrl+C to stop. Do not start a second copy if the service is already running.
 echo.

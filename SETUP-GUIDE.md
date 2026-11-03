@@ -12,6 +12,8 @@ The custom portal opens a balance dialog and sends a request to a small Node.js 
 
 ## Tested environment and current limits
 
+Current installed controller: **OC200 V1.0 / 6.3.0.111**, confirmed by the operator’s October 30 screenshot. Earlier 6.2.14.12 references below describe historical setup testing; the upgrade timing relative to individual tests was not recorded.
+
 This setup was verified with an OC200 V1 running Controller 6.2.14.12, an ER605, Omada EAPs, a Windows 11 computer, and an Android captive browser. Endpoint availability must be verified on other versions; Open API documentation for a Cloud-Based Controller alone does not establish local-controller support.
 
 Working: local API authentication, certificate verification, voucher lookup, guest access before authentication on the test SSID, and the portal balance form. The revised dialog layout still needs testing on each target phone/browser.
@@ -326,9 +328,9 @@ Replace `server.mjs` and `balance.html` in the Windows service folder and restar
 
 ## Windows double-click launcher
 
-`Start-GConnect.cmd` is included beside the service source. Copy it to `C:\GConnect\voucher-status-service` beside `server.mjs`, `.env`, and `oc200-cert.pem`. It changes to its own folder, finds Node.js in Program Files or PATH, sets `NODE_EXTRA_CA_CERTS` to the adjacent PEM unless already set, and runs `node --env-file=.env server.mjs`. Double-click to launch and leave the console open or minimized. Failures remain visible; no TLS verification is disabled and no credentials are printed. This launcher assumes this deployment's private controller certificate. Windows execution still needs verification.
+`start-gconnect-serv.cmd` is included beside the service source. Copy it to `C:\GConnect\voucher-status-service` beside `server.mjs`, `.env`, and `gconnect-trust-cert.pem`. It changes to its own folder, finds Node.js in Program Files or PATH, explicitly sets `NODE_EXTRA_CA_CERTS` to the adjacent `gconnect-trust-cert.pem`, overriding any inherited value, and runs `node --env-file=.env server.mjs`. Double-click to launch and leave the console open or minimized. Failures remain visible; no TLS verification is disabled and no credentials are printed. This launcher assumes this deployment's private controller certificate. Windows execution still needs verification.
 
-For automatic launch after sign-in, use Win+R → `shell:startup` and put a shortcut to this file there (not a copy of the launcher). It does not run before sign-in, restart after a crash, or change Windows power settings. Avoid multiple service instances. Screen-off and locking are fine; sleep and sign-out stop availability. Task Scheduler remains the alternative for unattended startup and recovery. No portal ZIP change is required.
+For automatic launch after sign-in, use Win+R → `shell:startup` and put a shortcut to this file there (not a copy of the launcher). It does not run before sign-in, restart after a crash, or change Windows power settings. After replacing an older launcher, update any desktop or Startup shortcut to point to `start-gconnect-serv.cmd`. Avoid multiple service instances. Screen-off and locking are fine; sleep and sign-out stop availability. Task Scheduler remains the alternative for unattended startup and recovery. No portal ZIP change is required.
 
 ## Voucher input clear buttons and E-Wallet column
 
@@ -349,3 +351,25 @@ The payment dialog now lists separate GCash/Maya and GoTyme destinations, each w
 SEE RATES / Back to Login now use a white border and text on the blue banner. The decorative WiFi SVG is reduced to 75% of its previous opacity. Mobile banner padding is 16px vertically (previously 20px), with a 130px minimum height. The rates-heading decorative separator is removed, retaining 10px above the subtitle. Previous CSS is backed up under `backups/2026-10-31-header-refinements/`. Redeploy the static portal ZIP only; live visual review is pending.
 
 Header button follow-up: an Android screenshot still showed a gray outline after the white-border CSS was added. The shared `#show-rates` control (both labels) now has an explicit white border and light color scheme to avoid automatic browser darkening. No conflicting border rule was found locally; device rendering/cache remains to be verified after redeployment.
+
+## Optional tawk.to chat before authentication
+
+The operator reported the widget working after adding URL entries `tawk.to` and `tawk.link` under the portal's pre-authentication access controls. Keep the balance-service `/32` exception and existing isolation rules. This is a reported working configuration on this deployment, not a universal vendor domain list or a guarantee about subdomain matching. Verify both sending and receiving a message before authentication; the report did not separately establish that full round trip. Future widget resources or attachment features may require additional verification. No balance-service change is required. The user supplies the tawk.to widget snippet separately; documentation does not imply that it has been added to the project by the assistant.
+
+The snippet is small, but the browser downloads external scripts and chat resources at runtime. Scope this optional exception to the support use case; do not assume that allowing tawk.to also enables Facebook/YouTube integrations. Android may close the captive portal after successful login.
+
+## Parked header feeds plan
+
+Future idea only: a Windows daily job could fetch selected updates into local `feeds.json`, served by the existing PC service. The portal would show lightweight text/link cards in a fixed-height header and retain the current banner on missing data. Keep the last successful feed if a fetch fails; external posts/videos would normally open after voucher login. YouTube fetching could be automated; Facebook Group updates would initially be manually selected due to API limitations. No scheduler, feed endpoint, API integration, or portal feed UI has been implemented. Fetched content and optional thumbnails would remain on the PC, outside the controller ZIP.
+
+## Customer FAQ data source
+
+An upload-preparation CSV is available at `docs/faq/gconnect-customer-faq.csv` with Question and Answer columns and 31 entries based on the current portal and operator policies. Review rates, payment destinations, pause eligibility, and SMS instructions before importing. Answers were checked against the 2,000-character form limit and CSV parsed successfully. Confirm importer headers using tawk.to’s actual CSV template; the provided screenshot only establishes manual Question/Answer fields. No upload or live API tool is implied. Maintenance and import notes are in `docs/faq/README.md`. Keep this customer FAQ out of the controller portal ZIP.
+
+## Voucher export classification — operator confirmed October 31
+
+In the controller export, `Notes = PRINT VOUCHER` identifies printed vouchers sold for cash. Vouchers without that note are allocated to the operator's automation workflow. The PHP 1 / 5-minute package is testing only and must not appear in customer FAQs or advertised rates. Apply this exclusion before classifying customer packages. This classification identifies the sales/fulfilment channel, not pause eligibility or proof of payment. The export does not establish disconnection/pause settings or concurrent-device semantics. Do not commit the raw voucher export or live codes.
+
+### Controller certificate replacement (November 2, 2026)
+
+The launcher now requires `gconnect-trust-cert.pem`; earlier certificate-generation examples produce `oc200-cert.pem`. Export the public certificate corresponding to the newly imported controller PFX (or its issuing CA) as `gconnect-trust-cert.pem`; do not generate an unrelated certificate just for Node. The controller certificate must match the hostname/IP in `OC200_URL` through its Subject Alternative Name. Save the controller import and restart the controller as required, then stop and restart Node so it loads the new trust file. For manual PowerShell startup, set `$env:NODE_EXTRA_CA_CERTS = "$PWD\gconnect-trust-cert.pem"` before starting Node. Old filenames in the original generation examples describe the earlier setup. The revised launcher prints its selected PEM path, not certificate contents or secrets. The reported `fetch failed` is consistent with a certificate mismatch but is not proof; successful Windows lookup after this revision remains unverified.
