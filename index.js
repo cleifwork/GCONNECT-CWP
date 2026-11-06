@@ -86,9 +86,9 @@ function handleSubmit(event) {
     if (data.errorCode === 0) {
       // Successful authentication
       openPopup(); // Show success popup
-      window.location.href = data.landingUrl; // Redirect to landing page
       // Redirect to the Google Forms URL as the landing page
-      // window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScoL8tOp0aHgdL860lZOfnIjEo2xiypcCImhK3R8XB28Q2YQQ/viewform";
+      // window.location.href = data.landingUrl;
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScoL8tOp0aHgdL860lZOfnIjEo2xiypcCImhK3R8XB28Q2YQQ/viewform";
     } else {
       isCommited = false; // Allow retries on failure
       openPopup(); // Show error popup
@@ -112,34 +112,113 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to show the popup
 function openPopup() {
-  var popcheck = document.getElementById("popcheck");
-  if (popcheck) popcheck.classList.add("open-popup");
+  var popup = document.getElementById("status-modal");
+  var message = document.getElementById("status-message");
+  var hint = document.getElementById("oper-hint");
+  if (message && hint) message.textContent = hint.textContent;
+  if (popup) popup.hidden = false;
 }
 
 // Function to close the popup
 function closePopup() {
-  var popcheck = document.getElementById("popcheck");
-  if (popcheck) popcheck.classList.remove("open-popup");
+  var popup = document.getElementById("status-modal");
+  if (popup) popup.hidden = true;
 }
 
 // Get references to the button, modal, and close button
 const ewalletButton = document.getElementById('ewallet-pay-btn');
 const modal = document.getElementById('image-modal');
 const closeButton = document.querySelector('.close-button');
+const statusCloseButton = document.getElementById('status-close');
+const voucherInput = document.getElementById('voucherCode');
+const clearVoucherButton = document.getElementById('clear-voucher');
 
 // Show the modal when the button is clicked
 ewalletButton.addEventListener('click', () => {
-    modal.style.display = 'block';
+    modal.hidden = false;
 });
 
 // Close the modal when the close button is clicked
 closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
+    modal.hidden = true;
 });
+
+statusCloseButton.addEventListener('click', closePopup);
 
 // Close the modal if the user clicks outside the modal content
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
-        modal.style.display = 'none';
+        modal.hidden = true;
     }
+    if (event.target === document.getElementById('status-modal')) {
+        closePopup();
+    }
+});
+
+function updateVoucherClearButton() {
+  clearVoucherButton.hidden = voucherInput.value.length === 0;
+}
+
+voucherInput.addEventListener('input', updateVoucherClearButton);
+clearVoucherButton.addEventListener('click', function () {
+  voucherInput.value = '';
+  updateVoucherClearButton();
+  voucherInput.focus();
+});
+
+document.querySelectorAll('.copy-payment-number').forEach(function (button) {
+  button.addEventListener('click', async function () {
+    const number = document.getElementById(button.dataset.number).textContent.replace(/\s/g, '');
+    const status = document.getElementById(button.dataset.status);
+    let copied = false;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(number);
+        copied = true;
+      } else {
+        const field = document.createElement('textarea');
+        field.value = number;
+        field.readOnly = true;
+        field.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px';
+        modal.appendChild(field);
+        try {
+          field.focus();
+          field.select();
+          field.setSelectionRange(0, number.length);
+          copied = document.execCommand('copy');
+        } finally {
+          field.remove();
+          button.focus();
+        }
+      }
+    } catch (error) {
+      copied = false;
+    }
+
+    status.textContent = copied ? 'Copied!' : 'Copy unavailable. Press and hold the number to copy.';
+  });
+});
+
+const timerInfoDialog = document.getElementById('timer-info-dialog');
+const timerInfoButton = document.getElementById('open-timer-info');
+timerInfoButton.addEventListener('click', function () {
+  timerInfoDialog.showModal();
+});
+document.getElementById('close-timer-info').addEventListener('click', function () {
+  timerInfoDialog.close();
+});
+document.getElementById('timer-info-done').addEventListener('click', function () {
+  timerInfoDialog.close();
+});
+timerInfoDialog.addEventListener('close', function () {
+  timerInfoButton.focus();
+});
+timerInfoDialog.addEventListener('click', function (event) {
+  if (event.target === timerInfoDialog) {
+    const bounds = timerInfoDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+      timerInfoDialog.close();
+    }
+  }
 });
