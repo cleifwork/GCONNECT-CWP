@@ -48,13 +48,15 @@ Configure these controls in Omada Site View. Keep controller management ports re
 
    ```sh
    zip -r gconnect-oc-custom-portal.zip index.html index.css overrides.css index.js \
-     jquery.min.js logo.png payment.js timer-info.js voucher-clear.js voucher-status.js img \
+     jquery.min.js logo.png payment.js timer-info.js voucher-clear.js voucher-status.js img audio \
      -x '*/.DS_Store'
    ```
 
    Keep the service folder, docs, `.env`, and certificate files outside the archive. Import the ZIP under the intended controller-hosted portal's **Design / Portal Customization** settings and apply.
 3. Before entering a voucher, open the service endpoint on a phone connected to the guest SSID. HTTP **405 “Use POST”** confirms reachability. Then use **Check remaining time** in the portal with a known voucher to verify the full lookup.
 4. After signing in, open `http://192.168.30.30:3080/balance` in a regular browser and check again. Guests can bookmark this page for when the captive portal closes.
+
+Successful controller authentication plays `audio/login.mp3` before redirecting to the landing page. Playback failure redirects immediately, with a 2.5-second maximum wait for interrupted playback. Invalid vouchers and balance lookups do not trigger the sound. Verify playback on your phone because captive browsers may block audio or close after authentication.
 
 Step 1 of the payment dialog explains that the dedicated payment SSID offers five minutes of free internet. Configure that SSID separately and verify the payment flow on a phone. The **Need help? Chat with the admin** button in the payment dialog opens a placeholder message.
 

@@ -108,6 +108,32 @@ var errorHintMap = {
     "-41538": "Voucher is not effective."
 };
 
+var loginSuccessAudio = new Audio("./audio/login.mp3");
+loginSuccessAudio.preload = "auto";
+
+function playLoginSuccessAndRedirect(url) {
+    var redirected = false;
+    var fallbackTimer;
+
+    function redirect() {
+        if (redirected) return;
+        redirected = true;
+        clearTimeout(fallbackTimer);
+        window.location.href = url;
+    }
+
+    loginSuccessAudio.addEventListener("ended", redirect, { once: true });
+    loginSuccessAudio.addEventListener("error", redirect, { once: true });
+    // Keep navigation working if playback is blocked, missing, or interrupted.
+    fallbackTimer = setTimeout(redirect, 2500);
+    try {
+        var playback = loginSuccessAudio.play();
+        if (playback) playback.catch(redirect);
+    } catch (error) {
+        redirect();
+    }
+}
+
 var isCommited;
 var formAuthController = useFormAuthController()
 var operHintAutoHideTimer;
@@ -313,9 +339,9 @@ Ajax.post(
                         data = JSON.parse(data);
                         if(!!data && data.errorCode === 0) {
                             isCommited = true;
-                            landingUrl = data.result || landingUrl
-                            window.location.href = landingUrl;
+                            landingUrl = data.result || landingUrl;
                             showOperHint(data.errorCode);
+                            playLoginSuccessAndRedirect(landingUrl);
                         } else{
                             showOperHint(data.errorCode);
                         }
