@@ -297,3 +297,53 @@
   border:2px solid #fff!important;
   background:transparent;
 }
+
+.support-link {
+  display: block;
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 10px 4px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #1465d8;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .support-link { color: #a5cdff; }
+}
+
+.payment-info-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  /* Keep the tap area from increasing the payment step line height. */
+  margin: -9px 0 -9px 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #1465d8;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.payment-info-button svg {
+  transform: translateY(-2px);
+}
+
+.payment-wifi-details {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  border-inline-start: 2px solid currentColor;
+}
+
+@media (prefers-color-scheme: dark) {
+  .payment-info-button { color: #a5cdff; }
+}

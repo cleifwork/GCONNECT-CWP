@@ -1,59 +1,44 @@
-# Windows 11 setup
+# Windows 11 voucher balance service
 
-Current version uses manual voucher entry; connection-based autofill is parked. The runtime files are `server.mjs`, `balance.mjs`, and `balance.html`, alongside your private `.env` and certificate. Test files are optional and run only with `node --test`; they are not loaded by the service.
+1. Install Node.js **22 or newer**. Copy the service to `C:\GConnect\voucher-status-service`. The runtime files are `server.mjs`, `balance.mjs`, and `balance.html`. No npm dependencies are required.
+2. Copy `.env.example` to `.env` and replace the placeholders with your local controller and Open API app settings. Example addresses:
 
-Guests can revisit `http://PC-IP:3080/balance` in a regular browser after authentication. Deploy `balance.html` alongside `server.mjs` and restart the service when updating. Bookmark that page; Android may close the captive login window after authentication. This standalone page needs a live Windows/phone test.
+   ```ini
+   OC200_URL=https://192.168.0.2:443
+   OMADA_ID=YOUR_CONTROLLER_ID
+   SITE_ID=YOUR_SITE_ID
+   CLIENT_ID=YOUR_APP_CLIENT_ID
+   CLIENT_SECRET=YOUR_APP_CLIENT_SECRET
+   PORT=3080
+   ALLOWED_ORIGINS=http://192.168.0.2:8088
+   ```
 
-This service reads voucher balances from the OC200 Open API. Live controller compatibility must be tested before making it available to guests.
+   See the [main setup guide](../SETUP-GUIDE.md#1-prepare-the-controller-and-windows-service) for both ways to find `SITE_ID`. `ALLOWED_ORIGINS` matches the captive portal's exact scheme, host, and port. Use a comma-separated list if you serve more than one portal origin. Keep `.env` private.
+3. For a private controller certificate, put the public trust PEM in `C:\GConnect\certs\gconnect-trust-cert.pem`. Double-click `start-gconnect-serv.cmd` in the service folder, or start it in PowerShell:
 
-1. Install Node.js 22 or newer and copy this service folder to `C:\GConnect\voucher-status-service`.
-2. Copy `.env.example` to `.env`. Fill in the OC200 Interface Access Address, Omada ID, Site ID, and an API application's credentials. Give the app Site Hotspot Manager View Only for the intended site. Keep `.env` on the PC; never upload it in the portal ZIP.
-3. If OC200 uses a private certificate, trust its issuing CA through `NODE_EXTRA_CA_CERTS` in the Windows environment before starting Node. Do not globally disable TLS verification. Use a controller hostname matching the certificate.
-4. In PowerShell, change into the service directory, set `$env:NODE_EXTRA_CA_CERTS = "$PWD\oc200-cert.pem"` for the private controller certificate, and run `node --env-file=.env server.mjs`. This avoids the Windows `npm.ps1` execution-policy issue. No npm dependencies are required.
-5. Test with a known voucher: `Invoke-RestMethod -Method Post -Uri http://localhost:3080/voucher-status -ContentType application/json -Body '{"code":"YOUR_TEST_CODE"}'`.
-6. Give the PC a DHCP reservation. Allow inbound TCP 3080 in Windows Firewall only from the guest subnet. Permit guest access to that port using your router/VLAN rules, and add the service address to Omada pre-authentication access if guests should check before logging in. Keep controller management inaccessible to guests.
-7. Set `window.GCONNECT_STATUS_URL` in the portal's `voucher-status.js` to `http://PC-IP:3080/voucher-status`. Set ALLOWED_ORIGINS to the actual portal origin, including scheme and port. HTTPS portals require an HTTPS service endpoint, normally through a reverse proxy with a trusted certificate; browsers block HTTPS-to-HTTP fetches. Android/browser local-network permissions may also apply.
-8. Repackage the portal with voucher-status.js included. Do not include this service folder.
-9. For automatic startup, create a Windows Task Scheduler task triggered At startup. Program: full path to `node.exe`; Arguments: `--env-file=.env server.mjs`; Start in: `C:\GConnect\voucher-status-service`. Use a restricted Windows account with permission to read its configuration and restart the task on failure.
+   ```powershell
+   Set-Location C:\GConnect\voucher-status-service
+   $env:NODE_EXTRA_CA_CERTS = "C:\GConnect\certs\gconnect-trust-cert.pem"
+   node --env-file=.env server.mjs
+   ```
 
-The service caches its token until shortly before expiry and obtains another with Client Credentials. It searches paginated voucher groups using exact code matching, allows one lookup at a time, and limits each source IP to six attempts per minute. A voucher code acts as the lookup credential. Avoid publishing the endpoint to the Internet.
+   With a publicly trusted controller certificate, use the direct Node command without setting a custom CA path. Expect `Voucher status service listening on port 3080`. Running Node directly avoids the `npm.ps1` execution-policy issue.
+4. From another PowerShell window, test with a known voucher:
 
-Missing remaining time is not treated as zero. Client-duration vouchers with timingByClientUsage=true return a device-specific message; accurate per-device balances need a separately verified session lookup. Group search is limited to 1000 groups. The service exposes no controller-changing routes.
+   ```powershell
+   $code = Read-Host "Voucher code"
+   Invoke-RestMethod -Method Post -Uri http://localhost:3080/voucher-status `
+     -ContentType "application/json" -Body (@{code=$code} | ConvertTo-Json)
+   ```
 
-## If the service PC IP changes
+   A successful lookup returns `found`, `status`, and `remainingSeconds` when the controller provides it. Checking a voucher does not redeem it. For Windows Firewall, Omada pre-auth access, ACLs, and the phone test, follow the [main setup guide](../SETUP-GUIDE.md).
 
-Update the DHCP reservation, Windows firewall LocalAddress, gateway ACL destination group, Omada pre-authentication IP `/32` (including parent Apply), portal `GCONNECT_STATUS_URL` and uploaded ZIP, plus DNS records/bookmarks/QR or landing URLs. Keep the permit above guest-to-IoT denies. See SETUP-GUIDE.md → “Changing the service PC IP” for the verification checklist. The deployment now uses reserved `192.168.30.30`; the user confirmed restored access after migration. A direct GET returning 405 “Use POST” verifies connectivity only, not voucher lookup.
+## Controller certificate
 
-## Remaining-time display
+To generate a certificate with GConnect V5, enter the local controller address under **Settings → Voucher Source → Open API**. In **Controller certificate**, tap **Setup**, enter the controller's IPv4 address, and tap **Share setup package**. Transfer the ZIP to Windows and extract it. Run `launch-gcontroller-cert.cmd` as prompted and choose a PFX password. It creates `omada-controller-https.pfx` and `gconnect-trust-cert.pem` in `C:\GConnect\certs`. Use the PFX for the OC200 import and the public PEM for Windows trust. If using the app for site discovery, add that same public PEM under **Controller certificate** on the phone.
 
-Both portal and standalone checkers format returned seconds locally as days, hours, and minutes: `2 days 3h 15 min`, `1 day`, `2h`, or `30 min`. Zero units are omitted; positive time below 60 seconds shows “Less than 1 min”; zero shows `0 min`. Whole minutes are rounded down. Days contain 86400 seconds, hours 3600 seconds. This only changes browser presentation: no additional API calls or changes to voucher timing. The responsive result font accommodates longer values. Syntax and representative formatting cases were checked locally; live phone verification is pending. Upload the rebuilt portal ZIP; for the standalone page, copy updated `balance.html` to the Windows service folder and restart Node.
+The certificate's Subject Alternative Name must match the IP or hostname in `OC200_URL`. If installing a private certificate on the OC200, import its password-protected PFX in **HTTPS Certificate**, save, and restart the controller as required. Use the corresponding public certificate PEM for a self-signed certificate or the issuing CA PEM for a privately issued certificate. The launcher reads that PEM from the sibling `certs` folder. After replacement, restart Node and repeat the local lookup to verify trust. Keep the PFX and private key out of the portal ZIP and Git.
 
-## Guest SSID exception verified after login
+## Keep the service running
 
-Keep Guest Network enabled. Under EAP ACL, use `Allow_GCONNECT_Balance_Service`: enabled, Permit TCP, source SSID `GCONNECT WIFI`, destination IP-Port group `GConnect_Balance_Service2` containing `192.168.30.30/32` and port `3080`. Put it above matching EAP denies and save/apply. The operator confirmed this resolved the live SSID timeout after authentication while retaining Guest Network. Keep the separate gateway permit, Windows firewall rule, and portal pre-authentication exception. Gateway ACLs alone did not override the observed EAP Guest filtering. Update this EAP destination too if the service IP changes. Full rule identification and verification limits are in SETUP-GUIDE.md.
-
-## Autofill rollback — manual checker retained
-
-Connection-based autofill was parked after live testing failed the strict SSID match. The runtime no longer queries client/session records, exposes `/my-voucher`, or attempts detection on page load. The helper and tests are retained separately under `experiments/voucher-autofill` for later investigation. Manual balance checking, days/hours/minutes formatting, status pills, and the `.30.30` service address remain unchanged.
-
-Replace `server.mjs` and `balance.html` in the Windows service folder and restart Node. Existing `balance.mjs`, `.env`, certificates, firewall and ACLs remain in place. Old `autofill.mjs` and `autofill.test.mjs` copies on Windows are unused and may be deleted. Remove optional `AUTOFILL_*` environment settings if present. Site Clients Manager View Only is no longer required by this service; remove it from the API app if nothing else uses it, retaining the hotspot read permission. No controller portal ZIP update is required. Local balance tests and script syntax checks passed; verify manual lookup after deploying the rollback.
-
-## Windows double-click launcher
-
-`start-gconnect-serv.cmd` is included beside the service source. Copy it to `C:\GConnect\voucher-status-service` beside `server.mjs`, `.env`, and `gconnect-trust-cert.pem`. It changes to its own folder, finds Node.js in Program Files or PATH, explicitly sets `NODE_EXTRA_CA_CERTS` to the adjacent `gconnect-trust-cert.pem`, overriding any inherited value, and runs `node --env-file=.env server.mjs`. Double-click to launch and leave the console open or minimized. Failures remain visible; no TLS verification is disabled and no credentials are printed. This launcher assumes this deployment's private controller certificate. Windows execution still needs verification.
-
-For automatic launch after sign-in, use Win+R → `shell:startup` and put a shortcut to this file there (not a copy of the launcher). It does not run before sign-in, restart after a crash, or change Windows power settings. After replacing an older launcher, update any desktop or Startup shortcut to point to `start-gconnect-serv.cmd`. Avoid multiple service instances. Screen-off and locking are fine; sleep and sign-out stop availability. Task Scheduler remains the alternative for unattended startup and recovery. No portal ZIP change is required.
-
-## Voucher input clear buttons and E-Wallet column
-
-Login, portal balance dialog, and standalone balance page now have an inline × action with accessible label “Clear voucher code”. It appears for nonempty text, clears the field and returns focus; pointer interaction avoids dropping input focus. Mobile keyboard retention still depends on the browser. Copied login text updates the dialog clear action. The login authentication flow and lookup endpoint are unchanged. The rates column now reads E-Wallet, covering the GCash/Maya payment guide; operators should verify both share the listed rates.
-
-Include `voucher-clear.js` in the controller static ZIP alongside the existing scripts. Upload the rebuilt ZIP and Apply. For the standalone checker copy updated `balance.html` to the Windows service folder and restart Node (the server reads the page at startup). No environment, firewall, or ACL changes are needed. Local syntax and event-behavior checks were performed; live mobile verification remains pending.
-
-## E-wallet payment destinations
-
-The payment dialog now lists separate GCash/Maya and GoTyme destinations, each with its own Copy button and feedback. Instruction text reads “Open E-wallet app and send payment.” The dialog remains scrollable on small screens. This is a static UI change, not an automated payment integration. Update destination numbers for your installation before publishing. Redeploy the rebuilt portal ZIP; no Windows service or network changes are needed.
-
-### Controller certificate replacement (November 2, 2026)
-
-The launcher now requires `gconnect-trust-cert.pem`; earlier certificate-generation examples produce `oc200-cert.pem`. Export the public certificate corresponding to the newly imported controller PFX (or its issuing CA) as `gconnect-trust-cert.pem`; do not generate an unrelated certificate just for Node. The controller certificate must match the hostname/IP in `OC200_URL` through its Subject Alternative Name. Save the controller import and restart the controller as required, then stop and restart Node so it loads the new trust file. For manual PowerShell startup, set `$env:NODE_EXTRA_CA_CERTS = "$PWD\gconnect-trust-cert.pem"` before starting Node. Old filenames in the original generation examples describe the earlier setup. The revised launcher prints its selected PEM path, not certificate contents or secrets. The reported `fetch failed` is consistent with a certificate mismatch but is not proof; successful Windows lookup after this revision remains unverified.
+Leave the console open or minimized and prevent sleep while plugged in. Screen-off and locking are fine. For startup after sign-in, put a shortcut to `start-gconnect-serv.cmd` in `shell:startup`. Verify startup after reboot on your PC.

@@ -1,4 +1,15 @@
 (function(){
+  var wifiInfoButton = document.getElementById('payment-wifi-info');
+  var wifiDetails = document.getElementById('payment-wifi-details');
+  wifiInfoButton.addEventListener('click', function () {
+    wifiDetails.hidden = !wifiDetails.hidden;
+    wifiInfoButton.setAttribute('aria-expanded', String(!wifiDetails.hidden));
+  });
+
+  document.getElementById('chat-admin').addEventListener('click', function () {
+    window.alert('This button is reserved for a Tawk.to chat link. Add your chat URL to integrate support in this portal, or remove the button if chat is not needed.');
+  });
+
   document.querySelectorAll('.copy-payment-number').forEach(function(button){
   button.addEventListener('click',async function(){
     var status=document.getElementById(button.dataset.status);
