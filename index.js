@@ -226,3 +226,10 @@ timerInfoDialog.addEventListener('click', function (event) {
 document.getElementById('chat-admin').addEventListener('click', function () {
   window.alert('This button is reserved for a Tawk.to chat link. Add your chat URL to integrate support in this portal, or remove the button if chat is not needed.');
 });
+
+const paymentWifiInfoButton = document.getElementById('payment-wifi-info');
+const paymentWifiDetails = document.getElementById('payment-wifi-details');
+paymentWifiInfoButton.addEventListener('click', function () {
+  paymentWifiDetails.hidden = !paymentWifiDetails.hidden;
+  paymentWifiInfoButton.setAttribute('aria-expanded', String(!paymentWifiDetails.hidden));
+});
