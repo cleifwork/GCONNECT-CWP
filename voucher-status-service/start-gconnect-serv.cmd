@@ -28,7 +28,7 @@ if errorlevel 1 (
 :node_ready
 rem Explicitly trust the current controller certificate; override stale inherited paths.
 set "GCONNECT_CERT_DIR=%~dp0..\certs"
-for %%I in ("%GCONNECT_CERT_DIR%") do set "GCONNECT_CERT_DIR=%%~fI
+for %%I in ("%GCONNECT_CERT_DIR%") do set "GCONNECT_CERT_DIR=%%~fI"
 
 set "NODE_EXTRA_CA_CERTS=%GCONNECT_CERT_DIR%\gconnect-trust-cert.pem"
 if not exist "%NODE_EXTRA_CA_CERTS%" (

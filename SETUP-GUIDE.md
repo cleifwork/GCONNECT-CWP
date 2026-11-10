@@ -15,7 +15,7 @@ The setup was verified with an OC200 V1, ER605, Omada EAPs, Windows 11, and an A
 
 1. Reserve the controller and Windows IPs in DHCP. On a managed ER605, use **Clients → select device → Config → Use Fixed IP Address** and confirm each device received its reserved address.
 2. On the local OC200, go to **Global View → Settings → Platform Integration → Open API**. Create a **Client Mode** app scoped to the intended site with **Site Hotspot Manager View Only** permission. Record its Omada ID, Client ID, and Client Secret privately.
-3. Get the site's `siteId` using either option below.
+3. Use the [Windows desktop setup form](voucher-status-service/README.md#desktop-setup-form) to create a certificate, discover the site, and save `.env` in one interface, or use an option below for site discovery. The form's Windows UI and certificate generation require Windows verification.
 4. Follow the [Windows service setup](voucher-status-service/README.md) to install Node, configure `.env` and certificate trust, and verify a lookup on the laptop.
 
 **GConnect V5:** Open **Settings → Voucher Source → Open API**. Enter the controller's Interface Access Address, Omada ID, Client ID, and Client Secret. For a local OC200, connect the phone to a network that can reach it and add the public PEM under **Controller certificate** if it uses private HTTPS. You can generate the certificate files with the [app's setup helper](voucher-status-service/README.md#controller-certificate). Tap the search icon beside **Site ID**, tap **Discover**, and select your site. The app fills the **Site ID** field with the full value. Use that value for `SITE_ID` in the Windows `.env`.

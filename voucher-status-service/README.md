@@ -1,7 +1,7 @@
 # Windows 11 voucher balance service
 
 1. Install Node.js **22 or newer**. Copy the service to `C:\GConnect\voucher-status-service`. The runtime files are `server.mjs`, `balance.mjs`, and `balance.html`. No npm dependencies are required.
-2. Copy `.env.example` to `.env` and replace the placeholders with your local controller and Open API app settings. Example addresses:
+2. Use the [desktop setup form](#desktop-setup-form), or copy `.env.example` to `.env` and replace the placeholders with your local controller and Open API app settings. Example addresses:
 
    ```ini
    OC200_URL=https://192.168.0.2:443
@@ -42,3 +42,15 @@ The certificate's Subject Alternative Name must match the IP or hostname in `OC2
 ## Keep the service running
 
 Leave the console open or minimized and prevent sleep while plugged in. Screen-off and locking are fine. For startup after sign-in, put a shortcut to `start-gconnect-serv.cmd` in `shell:startup`. Verify startup after reboot on your PC.
+
+## Desktop setup form
+
+Copy `gconnect-balance-setup.cmd`, `gconnect-balance-setup.ps1`, and `setup-controller.mjs` together onto the Windows PC. Install Node.js 22 or newer, then double-click `gconnect-balance-setup.cmd`.
+
+1. Enter the controller HTTPS URL, Omada ID, Client ID, Client Secret, and installation folder (example `C:\GConnect`).
+2. Choose an existing public trust PEM, or enter a new PFX password twice and click **Create certificate**. Import the generated `certs\omada-controller-https.pfx` into the OC200, save/apply, and restart as required before continuing. The matching public PEM is `certs\gconnect-trust-cert.pem`.
+3. Click **Test connection and discover sites**, then select the intended site. Site discovery requires site-list permission on the Open API app. Certificate trust and address matching stay enabled.
+4. Enter the exact captive portal origin and service port, then click **Save configuration**. This writes `voucher-status-service\.env` and places the public PEM in the sibling `certs` folder. Existing output files require confirmation before replacement; keep a private backup.
+5. Place the runtime files and `start-gconnect-serv.cmd` in the selected service folder, then start the service and test a voucher using the steps above.
+
+The form does not change controller settings, firewall rules, ACLs, or the portal ZIP. It runs only during setup. The Node API helper has been tested locally against a mock HTTPS controller; the Windows form and certificate generation still require verification on Windows 11. Keep generated credentials and PFX files private.
