@@ -146,6 +146,7 @@ $discover.Add_Click({
         $signature = Signature
         $info = New-Object Diagnostics.ProcessStartInfo
         $info.FileName = (Get-Command node.exe -ErrorAction Stop).Source
+        if ([int]((& $info.FileName --version).TrimStart('v').Split('.')[0]) -lt 22) { throw 'Install Node.js 22 or newer before setup.' }
         $info.Arguments = '"' + (Join-Path $PSScriptRoot 'setup-controller.mjs') + '"'
         $info.UseShellExecute = $false
         $info.CreateNoWindow = $true

@@ -70,3 +70,11 @@ Step 1 of the payment dialog explains that the dedicated payment SSID offers fiv
 | Node reports `fetch failed` | Confirm the OC200 API is reachable and the public PEM matches the active controller certificate or issuing CA. See the [Windows service setup](voucher-status-service/README.md#controller-certificate). |
 
 If the Windows IP changes, update the DHCP reservation, firewall local address, gateway and EAP destination groups, pre-auth entry, portal endpoint and ZIP, and any saved links or DNS records. Repeat the phone checks before and after login.
+
+## Local service protection
+
+Keep this service LAN-only: do not port-forward it or publish it through a tunnel. Retain the guest-subnet Windows firewall scope and the Omada service IP/port permits above. CORS is a browser restriction, not client authentication; guests who know a voucher code can check its balance.
+
+The service limits each source IP to six POST attempts per minute, permits one controller lookup at a time, and bounds each lookup to 40 API calls with a 20-second lookup deadline. Rate-limited requests return HTTP 429. Controller requests also have individual timeouts. TLS verification must remain enabled. These limits reduce abuse but do not replace the firewall or prevent a guest from guessing codes across multiple devices.
+
+The launcher and setup form check for Node.js 22 or newer. Local automated HTTP tests cover input validation, origins, rate limiting and overlapping requests; repeat the pre-login and post-login phone tests after replacing `server.mjs`. The Windows setup form still needs Windows verification.

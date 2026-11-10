@@ -26,6 +26,11 @@ if errorlevel 1 (
   goto failed
 )
 :node_ready
+"%GCONNECT_NODE%" -e "if(Number(process.versions.node.split('.')[0])<22)process.exit(1)"
+if errorlevel 1 (
+  echo Node.js 22 or newer is required.
+  goto failed
+)
 rem Explicitly trust the current controller certificate; override stale inherited paths.
 set "GCONNECT_CERT_DIR=%~dp0..\certs"
 for %%I in ("%GCONNECT_CERT_DIR%") do set "GCONNECT_CERT_DIR=%%~fI"

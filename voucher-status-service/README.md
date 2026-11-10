@@ -54,3 +54,11 @@ Copy `gconnect-balance-setup.cmd`, `gconnect-balance-setup.ps1`, and `setup-cont
 5. Place the runtime files and `start-gconnect-serv.cmd` in the selected service folder, then start the service and test a voucher using the steps above.
 
 The form does not change controller settings, firewall rules, ACLs, or the portal ZIP. It runs only during setup. The Node API helper has been tested locally against a mock HTTPS controller; the Windows form and certificate generation still require verification on Windows 11. Keep generated credentials and PFX files private.
+
+## Local service protection
+
+Keep this service LAN-only: do not port-forward it or publish it through a tunnel. Retain the guest-subnet Windows firewall scope and the Omada service IP/port permits above. CORS is a browser restriction, not client authentication; guests who know a voucher code can check its balance.
+
+The service limits each source IP to six POST attempts per minute, permits one controller lookup at a time, and bounds each lookup to 40 API calls with a 20-second lookup deadline. Rate-limited requests return HTTP 429. Controller requests also have individual timeouts. TLS verification must remain enabled. These limits reduce abuse but do not replace the firewall or prevent a guest from guessing codes across multiple devices.
+
+The launcher and setup form check for Node.js 22 or newer. Local automated HTTP tests cover input validation, origins, rate limiting and overlapping requests; repeat the pre-login and post-login phone tests after replacing `server.mjs`. The Windows setup form still needs Windows verification.
