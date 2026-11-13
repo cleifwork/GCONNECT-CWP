@@ -4,9 +4,10 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
 $form = New-Object Windows.Forms.Form
-$form.Text = 'GConnect Balance Setup'
+$form.Text = 'GConnect Voucher Balance Setup'
 $form.Size = New-Object Drawing.Size(740, 760)
-$form.MinimumSize = $form.Size
+$form.MinimumSize = New-Object Drawing.Size(730, 460)
+$form.AutoScroll = $true
 $form.StartPosition = 'CenterScreen'
 $script:verified = ''
 $script:sites = @()
@@ -16,6 +17,7 @@ function Field($label, $value, $y, $masked = $false) {
     $caption.Text = $label
     $caption.SetBounds(20, $y + 4, 190, 25)
     $box = New-Object Windows.Forms.TextBox
+    $box.Tag = $caption
     $box.Text = $value
     $box.UseSystemPasswordChar = $masked
     $box.SetBounds(215, $y, 475, 26)
@@ -29,8 +31,34 @@ function Button($text, $x, $y, $width) {
     $form.Controls.Add($button)
     return $button
 }
+function Field-Action($box, $text, $accessibleName) {
+    $box.Width = 385
+    $button = Button $text 610 ($box.Top - 1) 80
+    $button.Height = 27
+    $button.AccessibleName = $accessibleName
+    return $button
+}
+function Add-PasteButton($box, $label) {
+    $button = Field-Action $box 'Paste' "Paste $label"
+    $button.Image = $clipboardIcon
+    $button.TextImageRelation = 'ImageBeforeText'
+    $button.Tag = $box
+    $button.Add_Click({
+        param($sender, $eventArgs)
+        try {
+            $text = [Windows.Forms.Clipboard]::GetText()
+            if ($text.Length -gt 0) {
+                $sender.Tag.Text = $text
+                [void]$sender.Tag.Focus()
+                $sender.Tag.SelectionStart = $sender.Tag.TextLength
+            }
+        } catch {
+            Notice 'Could not read the clipboard. Copy the value again and retry.'
+        }
+    })
+}
 function Notice($text) {
-    [void][Windows.Forms.MessageBox]::Show($form, $text, 'GConnect Balance Setup')
+    [void][Windows.Forms.MessageBox]::Show($form, $text, 'GConnect Voucher Balance Setup')
 }
 function Confirm-Replace($paths) {
     $existing = @($paths | Where-Object { Test-Path -LiteralPath $_ })
@@ -63,46 +91,125 @@ function Env-Value([string]$value) {
     throw 'A value contains all three quote characters. Configure that value manually.'
 }
 
-$controller = Field 'Controller HTTPS URL' 'https://192.168.0.2:443' 25
-$omada = Field 'Omada ID' '' 63
-$client = Field 'Client ID' '' 101
-$secret = Field 'Client Secret' '' 139 $true
-$folder = Field 'Installation folder' 'C:\GConnect' 177
-$pem = Field 'Public trust PEM' 'C:\GConnect\certs\gconnect-trust-cert.pem' 215
-$browse = Button 'Choose PEM' 215 252 125
-$create = Button 'Create certificate' 350 252 165
-$password = Field 'New PFX password' '' 302 $true
-$confirmPassword = Field 'Confirm PFX password' '' 340 $true
+$clipboardIcon = New-Object Drawing.Bitmap(16, 16)
+$graphics = [Drawing.Graphics]::FromImage($clipboardIcon)
+try {
+    $pen = [Drawing.SystemPens]::ControlText
+    $graphics.DrawRectangle($pen, 3, 4, 9, 10)
+    $graphics.FillRectangle([Drawing.SystemBrushes]::Control, 5, 2, 6, 4)
+    $graphics.DrawRectangle($pen, 5, 2, 5, 4)
+    $graphics.DrawLine($pen, 5, 8, 10, 8)
+    $graphics.DrawLine($pen, 5, 11, 10, 11)
+} finally {
+    $graphics.Dispose()
+}
+
+function Setup-Label($text, $y, $height = 24, $heading = $false) {
+    $label = New-Object Windows.Forms.Label
+    $label.Text = $text
+    $label.SetBounds(20, $y, 670, $height)
+    if ($heading) { $label.Font = New-Object Drawing.Font($form.Font, [Drawing.FontStyle]::Bold) }
+    $form.Controls.Add($label)
+    return $label
+}
+
+[void](Setup-Label '1. Set up certificate trust' 15 24 $true)
+$controller = Field 'Controller HTTPS URL' 'https://192.168.0.2:443' 43
+Add-PasteButton $controller 'Controller HTTPS URL'
+$folder = Field 'Installation folder' 'C:\GConnect' 76
+$browseFolder = Field-Action $folder 'Browse...' 'Browse for installation folder'
+
+$existingCert = New-Object Windows.Forms.RadioButton
+$existingCert.Text = 'Use an existing PEM'
+$existingCert.SetBounds(215, 109, 180, 25)
+$existingCert.Checked = $true
+$newCert = New-Object Windows.Forms.RadioButton
+$newCert.Text = 'Create a new certificate'
+$newCert.SetBounds(405, 109, 230, 25)
+$form.Controls.AddRange(@($existingCert, $newCert))
+
+$pem = Field 'Public trust PEM' 'C:\GConnect\certs\gconnect-trust-cert.pem' 143
+$browsePem = Field-Action $pem 'Browse...' 'Browse for public trust PEM'
+$password = Field 'New PFX password' '' 177 $true
+$confirmPassword = Field 'Confirm PFX password' '' 210 $true
+$create = Button 'Create certificate' 215 243 165
+$certHint = Setup-Label 'After creating the files, import the PFX into the controller before testing the connection.' 283
+$certControls = @($password.Tag, $password, $confirmPassword.Tag, $confirmPassword, $create, $certHint)
+
+[void](Setup-Label '2. Connect and select a site' 181 24 $true)
+$omada = Field 'Omada ID' '' 209
+Add-PasteButton $omada 'Omada ID'
+$client = Field 'Client ID' '' 242
+Add-PasteButton $client 'Client ID'
+$secret = Field 'Client Secret' '' 275 $true
+Add-PasteButton $secret 'Client Secret'
 $show = New-Object Windows.Forms.CheckBox
 $show.Text = 'Show passwords'
-$show.SetBounds(525, 258, 170, 25)
+$show.SetBounds(215, 307, 170, 25)
 $form.Controls.Add($show)
 $show.Add_CheckedChanged({
     $secret.UseSystemPasswordChar = !$show.Checked
     $password.UseSystemPasswordChar = !$show.Checked
     $confirmPassword.UseSystemPasswordChar = !$show.Checked
 })
-$discover = Button 'Test connection and discover sites' 215 383 320
-$siteLabel = New-Object Windows.Forms.Label
-$siteLabel.Text = 'Select site'
-$siteLabel.SetBounds(20, 437, 190, 25)
+$discover = Button 'Test connection and discover sites' 215 339 320
+$siteLabel = Setup-Label 'Select site' 387
+$siteLabel.Width = 190
 $siteList = New-Object Windows.Forms.ComboBox
 $siteList.DropDownStyle = 'DropDownList'
-$siteList.SetBounds(215, 431, 475, 28)
-$form.Controls.AddRange(@($siteLabel, $siteList))
-$origin = Field 'Portal origin' 'http://192.168.0.2:8088' 478
-$port = Field 'Service port' '3080' 516
-$save = Button 'Save configuration' 215 560 200
-$status = New-Object Windows.Forms.Label
-$status.Text = 'Choose a public PEM, or create a certificate and import its PFX into OC200 before discovery. Node.js 22+ must be installed.'
-$status.SetBounds(20, 617, 675, 90)
-$form.Controls.Add($status)
+$siteList.SetBounds(215, 383, 475, 28)
+$form.Controls.Add($siteList)
 
-$browse.Add_Click({
+[void](Setup-Label '3. Save the checker configuration' 427 24 $true)
+$origin = Field 'Portal origin' 'http://192.168.0.2:8088' 455
+$port = Field 'Service port' '3080' 488
+$save = Button 'Save configuration' 215 524 200
+$status = Setup-Label 'Node.js 22+ must be installed on this PC.' 570 70
+
+$lowerLayout = @($form.Controls | Where-Object {
+    $_.Top -ge 181 -and $_ -notin $certControls
+} | ForEach-Object { @{ Control = $_; Top = $_.Top } })
+foreach ($control in $certControls) { $control.Hide() }
+$newCert.Add_CheckedChanged({
+    $form.AutoScrollPosition = [Drawing.Point]::Empty
+    $form.SuspendLayout()
+    try {
+        $offset = if ($newCert.Checked) { 134 } else { 0 }
+        foreach ($entry in $lowerLayout) { $entry.Control.Top = $entry.Top + $offset }
+        foreach ($control in $certControls) { $control.Visible = $newCert.Checked }
+        if (!$newCert.Checked) {
+            $password.Clear()
+            $confirmPassword.Clear()
+        }
+    } finally {
+        $form.ResumeLayout($true)
+    }
+})
+
+$browseFolder.Add_Click({
+    $dialog = New-Object Windows.Forms.FolderBrowserDialog
+    try {
+        $dialog.Description = 'Select the GConnect installation folder.'
+        if (Test-Path -LiteralPath $folder.Text -PathType Container) {
+            $dialog.SelectedPath = $folder.Text
+        }
+        if ($dialog.ShowDialog($form) -eq 'OK') { $folder.Text = $dialog.SelectedPath }
+    } finally {
+        $dialog.Dispose()
+    }
+})
+$browsePem.Add_Click({
     $dialog = New-Object Windows.Forms.OpenFileDialog
-    $dialog.Filter = 'PEM certificate (*.pem)|*.pem|All files (*.*)|*.*'
-    if ($dialog.ShowDialog() -eq 'OK') { $pem.Text = $dialog.FileName }
-    $dialog.Dispose()
+    try {
+        $dialog.Title = 'Select the public trust certificate'
+        $dialog.Filter = 'PEM certificate (*.pem)|*.pem|All files (*.*)|*.*'
+        if (Test-Path -LiteralPath $pem.Text -PathType Leaf) {
+            $dialog.FileName = $pem.Text
+        }
+        if ($dialog.ShowDialog($form) -eq 'OK') { $pem.Text = $dialog.FileName }
+    } finally {
+        $dialog.Dispose()
+    }
 })
 $create.Add_Click({
     try {
@@ -130,6 +237,7 @@ $create.Add_Click({
             "`r`n-----END CERTIFICATE-----`r`n"
         [IO.File]::WriteAllText($pemPath, $text, [Text.Encoding]::ASCII)
         $pem.Text = $pemPath
+        $existingCert.Checked = $true
         $script:verified = ''
         $password.Clear()
         $confirmPassword.Clear()
@@ -227,3 +335,4 @@ $save.Add_Click({
 })
 [void]$form.ShowDialog()
 $form.Dispose()
+$clipboardIcon.Dispose()

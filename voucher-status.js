@@ -27,7 +27,7 @@ window.GCONNECT_STATUS_URL = 'http://192.168.30.30:3080/voucher-status';
       var data=await response.json();if(!response.ok)throw new Error(data.error || 'Unable to check balance.');
       if(data.found){
         badge.dataset.status=['unused','active','expired'].includes(data.status)?data.status:'unknown';
-        badge.textContent=data.status==='unused'?'Not Activated':data.status==='active'?'Active':data.status==='expired'?'Expired':'Status unavailable';
+        badge.textContent=data.status==='unused'?'Unused':data.status==='active'?'In-use':data.status==='expired'?'Expired':'Status unavailable';
       }
       if(!data.found) result.textContent='Voucher not found.';
       else if(data.deviceSpecific) result.textContent='This voucher has a separate balance for each device. Check the connected device’s session status.';

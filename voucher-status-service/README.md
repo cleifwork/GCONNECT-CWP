@@ -45,13 +45,13 @@ Leave the console open or minimized and prevent sleep while plugged in. Screen-o
 
 ## Desktop setup form
 
-Copy `gconnect-balance-setup.cmd`, `gconnect-balance-setup.ps1`, and `setup-controller.mjs` together onto the Windows PC. Install Node.js 22 or newer, then double-click `gconnect-balance-setup.cmd`.
+To open **GConnect Voucher Balance Setup**, copy `gconnect-balance-setup.cmd`, `gconnect-balance-setup.ps1`, and `setup-controller.mjs` together onto the Windows PC. Install Node.js 22 or newer, then double-click `gconnect-balance-setup.cmd`.
 
-1. Enter the controller HTTPS URL, Omada ID, Client ID, Client Secret, and installation folder (example `C:\GConnect`).
-2. Choose an existing public trust PEM, or enter a new PFX password twice and click **Create certificate**. Import the generated `certs\omada-controller-https.pfx` into the OC200, save/apply, and restart as required before continuing. The matching public PEM is `certs\gconnect-trust-cert.pem`.
-3. Click **Test connection and discover sites**, then select the intended site. Site discovery requires site-list permission on the Open API app. Certificate trust and address matching stay enabled.
-4. Enter the exact captive portal origin and service port, then click **Save configuration**. This writes `voucher-status-service\.env` and places the public PEM in the sibling `certs` folder. Existing output files require confirmation before replacement; keep a private backup.
-5. Place the runtime files and `start-gconnect-serv.cmd` in the selected service folder, then start the service and test a voucher using the steps above.
+1. In **Set up certificate trust**, enter the controller HTTPS URL and choose the installation folder (example `C:\GConnect`). Select **Use an existing PEM** and browse to the public trust certificate, or select **Create a new certificate** to reveal the PFX password fields and the **Create certificate** button. Import the generated `certs\omada-controller-https.pfx` into the controller, save, and restart the controller before testing. The form selects the matching public PEM after creation.
+2. In **Connect and select a site**, enter your Omada ID, Client ID, and Client Secret. Use **Paste** to fill a connection field from the clipboard. Click **Test connection and discover sites**, then choose your site. The Open API app needs site-list permission.
+3. In **Save the checker configuration**, enter the exact portal origin and service port, then click **Save configuration**. The form writes `voucher-status-service\.env` and places the public PEM in the sibling `certs` folder. It asks before replacing existing files.
+
+Place the runtime files and `start-gconnect-serv.cmd` in the selected service folder, then start the service and test a voucher using the steps above.
 
 The form does not change controller settings, firewall rules, ACLs, or the portal ZIP. It runs only during setup. The Node API helper has been tested locally against a mock HTTPS controller; the Windows form and certificate generation still require verification on Windows 11. Keep generated credentials and PFX files private.
 
