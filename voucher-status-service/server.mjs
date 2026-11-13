@@ -100,7 +100,14 @@ const server = http.createServer(async (req,res) => {
     if (busy) {res.setHeader('Retry-After','2');return send(429,{error:'Please wait a moment before checking again.'});}
     busy=true;
     try {send(200,await lookup(code));} finally {busy=false;}
-  } catch(error) {console.error('Voucher lookup failed:',error.message);send(502,{error:'Unable to read voucher balance. Please try again later.'});}
+  } catch (error) {
+    const causeCode = error.cause?.code;
+    const detail = typeof causeCode === 'string' && /^[A-Z0-9_]+$/.test(causeCode)
+      ? ` (${causeCode})`
+      : '';
+    console.error('Voucher lookup failed:', error.message + detail);
+    send(502, {error:'Unable to read voucher balance. Please try again later.'});
+  }
 });
 server.requestTimeout=15000;
 server.headersTimeout=10000;

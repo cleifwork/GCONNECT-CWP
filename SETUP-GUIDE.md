@@ -67,7 +67,7 @@ Step 1 of the payment dialog explains that the dedicated payment SSID offers fiv
 | Laptop responds but phone times out before login | Confirm the current reserved IP, Windows firewall scope, gateway permit, and **Apply** on the pre-auth page. |
 | Phone reaches the endpoint but the portal check fails | Confirm the ZIP uses the right endpoint and the service allows the exact portal origin. Android may show only the IP even when the origin uses port `8088`. |
 | Works before login but times out afterward | Verify the EAP permit matches the live SSID and service IP/port. |
-| Node reports `fetch failed` | Confirm the OC200 API is reachable and the public PEM matches the active controller certificate or issuing CA. See the [Windows service setup](voucher-status-service/README.md#controller-certificate). |
+| Node reports `fetch failed` | Check the cause code in the Node console. Certificate trust errors point to the public PEM or issuing CA, `ERR_TLS_CERT_ALTNAME_INVALID` points to an address mismatch, and `ECONNREFUSED` points to the configured host or port. See the [Windows service setup](voucher-status-service/README.md#controller-certificate). |
 
 If the Windows IP changes, update the DHCP reservation, firewall local address, gateway and EAP destination groups, pre-auth entry, portal endpoint and ZIP, and any saved links or DNS records. Repeat the phone checks before and after login.
 
