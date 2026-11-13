@@ -1,6 +1,6 @@
 # GConnect OC200 voucher balance checker
 
-Guests enter a voucher code in the captive portal to check its remaining time without activating it. Both balance views use the controller labels **Unused**, **In-use**, and **Expired**. A Node.js service on Windows reads the voucher from the OC200 Open API. Keep the API credentials on Windows.
+Guests enter a voucher code in the captive portal to check its remaining time without activating it. Both balance views use the same voucher icon and bold **Check balance** button. They use the controller labels **Unused**, **In-use**, and **Expired**. A Node.js service on Windows reads the voucher from the OC200 Open API. Keep the API credentials on Windows.
 
 The setup was verified with an OC200 V1, ER605, Omada EAPs, Windows 11, and an Android phone. Confirm that your controller exposes the local Open API and voucher-group endpoints.
 
