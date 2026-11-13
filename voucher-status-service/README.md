@@ -45,7 +45,7 @@ Leave the console open or minimized and prevent sleep while plugged in. Screen-o
 
 ## Desktop setup form
 
-To open **GConnect Voucher Balance Setup**, copy `gconnect-balance-setup.cmd`, `gconnect-balance-setup.ps1`, and `setup-controller.mjs` together onto the Windows PC. Install Node.js 22 or newer, then double-click `gconnect-balance-setup.cmd`.
+To open **GConnect Voucher Setup**, copy `gconnect-voucher-setup.cmd`, `gconnect-voucher-setup.ps1`, and `setup-controller.mjs` together onto the Windows PC. Install Node.js 22 or newer, then double-click `gconnect-voucher-setup.cmd`.
 
 1. In **Set up certificate trust**, enter the controller HTTPS URL and choose the installation folder (example `C:\GConnect`). Select **Use an existing PEM** and browse to the public trust certificate, or select **Create a new certificate** to reveal the PFX password fields and the **Create certificate** button. Import the generated `certs\omada-controller-https.pfx` into the controller, save, and restart the controller before testing. The form selects the matching public PEM after creation.
 2. In **Connect and select a site**, enter your Omada ID, Client ID, and Client Secret. Use **Paste** to fill a connection field from the clipboard. Click **Test connection and discover sites**, then choose your site. The Open API app needs site-list permission.

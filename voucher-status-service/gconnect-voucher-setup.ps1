@@ -4,7 +4,7 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
 $form = New-Object Windows.Forms.Form
-$form.Text = 'GConnect Voucher Balance Setup'
+$form.Text = 'GConnect Voucher Setup'
 $form.Size = New-Object Drawing.Size(740, 760)
 $form.MinimumSize = New-Object Drawing.Size(730, 460)
 $form.AutoScroll = $true
@@ -58,7 +58,7 @@ function Add-PasteButton($box, $label) {
     })
 }
 function Notice($text) {
-    [void][Windows.Forms.MessageBox]::Show($form, $text, 'GConnect Voucher Balance Setup')
+    [void][Windows.Forms.MessageBox]::Show($form, $text, 'GConnect Voucher Setup')
 }
 function Confirm-Replace($paths) {
     $existing = @($paths | Where-Object { Test-Path -LiteralPath $_ })
