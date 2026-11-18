@@ -37,6 +37,8 @@
 
 The operator confirmed the portable runtime works on Windows 11 on November 18, 2026, using **Node.js v26.13.0 for Windows x64**. No separate Node.js installation or npm dependencies are needed for this service.
 
+The repository includes `runtime/node.exe` and its matching `runtime/LICENSE`, so a normal clone or GitHub source ZIP includes the portable runtime. The executable is about 95.5 MiB; check future replacements against GitHub's 100 MiB per-file limit before committing them.
+
 Keep these folders together under the installation folder (example):
 
 ```text
