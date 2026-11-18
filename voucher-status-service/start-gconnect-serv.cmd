@@ -16,13 +16,16 @@ if not exist "server.mjs" (
   echo Missing server.mjs. Put this launcher in the voucher-status-service folder.
   goto failed
 )
-rem Prefer the standard Node installation; otherwise use the user's PATH.
+rem Prefer the portable runtime beside the service folder.
+set "GCONNECT_NODE=%~dp0..\runtime\node.exe"
+if exist "%GCONNECT_NODE%" goto node_ready
+rem Otherwise use the standard installation or the user's PATH.
 set "GCONNECT_NODE=%ProgramFiles%\nodejs\node.exe"
 if exist "%GCONNECT_NODE%" goto node_ready
 set "GCONNECT_NODE=node.exe"
 where node.exe >nul 2>&1
 if errorlevel 1 (
-  echo Node.js was not found. Install Node.js 22 or newer, then try again.
+  echo Node.js was not found. Add runtime\node.exe beside the service folder or install Node.js 22 or newer.
   goto failed
 )
 :node_ready

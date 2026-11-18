@@ -15,8 +15,10 @@ The setup was verified with an OC200 V1, ER605, Omada EAPs, Windows 11, and an A
 
 1. Reserve the controller and Windows IPs in DHCP. On a managed ER605, use **Clients → select device → Config → Use Fixed IP Address** and confirm each device received its reserved address.
 2. On the local OC200, go to **Global View → Settings → Platform Integration → Open API**. Create a **Client Mode** app scoped to the intended site with **Site Hotspot Manager View Only** permission. Record its Omada ID, Client ID, and Client Secret privately.
-3. Use the [Windows desktop setup form](voucher-status-service/README.md#desktop-setup-form) to create a certificate, discover the site, and save `.env` in one interface, or use an option below for site discovery. The form's Windows UI and certificate generation require Windows verification.
-4. Follow the [Windows service setup](voucher-status-service/README.md) to install Node, configure `.env` and certificate trust, and verify a lookup on the laptop.
+3. Use the [Windows desktop setup form](voucher-status-service/README.md#desktop-setup-form) to create a certificate, discover the site, and save `.env` in one interface, or use an option below for site discovery. A complete fresh-install workflow, including new certificate generation, still requires Windows verification.
+4. Follow the [Windows service setup](voucher-status-service/README.md) to place the portable runtime in `C:\GConnect\runtime`, configure `.env` and certificate trust, and verify a lookup on the laptop.
+
+**Portable runtime:** The operator confirmed Node.js **v26.13.0 (Windows x64)** works on Windows 11 on November 18, 2026. Keep `runtime` beside `voucher-status-service`; a separate Node.js installation is optional. The [portable setup reference](voucher-status-service/README.md#portable-nodejs) covers folder layout, licensing, updates, and the [official Node.js installer](https://nodejs.org/en/download) fallback (22 or newer). Existing certificate trust, `.env`, firewall, pre-auth access, and ACL requirements still apply.
 
 **GConnect V5:** Open **Settings → Voucher Source → Open API**. Enter the controller's Interface Access Address, Omada ID, Client ID, and Client Secret. For a local OC200, connect the phone to a network that can reach it and add the public PEM under **Controller certificate** if it uses private HTTPS. You can generate the certificate files with the [app's setup helper](voucher-status-service/README.md#controller-certificate). Tap the search icon beside **Site ID**, tap **Discover**, and select your site. The app fills the **Site ID** field with the full value. Use that value for `SITE_ID` in the Windows `.env`.
 
@@ -77,4 +79,4 @@ Keep this service LAN-only: do not port-forward it or publish it through a tunne
 
 The service limits each source IP to six POST attempts per minute, permits one controller lookup at a time, and bounds each lookup to 40 API calls with a 20-second lookup deadline. Rate-limited requests return HTTP 429. Controller requests also have individual timeouts. TLS verification must remain enabled. These limits reduce abuse but do not replace the firewall or prevent a guest from guessing codes across multiple devices.
 
-The launcher and setup form check for Node.js 22 or newer. Local automated HTTP tests cover input validation, origins, rate limiting and overlapping requests; repeat the pre-login and post-login phone tests after replacing `server.mjs`. The Windows setup form still needs Windows verification.
+The launcher and setup form check for Node.js 22 or newer. Local automated HTTP tests cover input validation, origins, rate limiting and overlapping requests; repeat the pre-login and post-login phone tests after replacing `server.mjs`.

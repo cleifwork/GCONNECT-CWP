@@ -48,7 +48,7 @@ Use a configured test SSID to preview the complete login and balance flow. A loc
 
 - An OC200 with the documented local Open API and a site-scoped API application.
 - A compatible Omada network and voucher-enabled portal.
-- An always-on device for the balance service; the documented setup uses Windows 11 and **Node.js 22 or newer**.
+- An always-on device for the balance service; the documented setup uses Windows 11 and [portable Node.js](voucher-status-service/README.md#portable-nodejs) (confirmed with **v26.13.0, Windows x64**), with installed Node.js 22 or newer as a fallback.
 - A reserved service-host IP, certificate trust, and narrowly scoped firewall/ACL access.
 
 Start with the **[setup and troubleshooting guide](SETUP-GUIDE.md)**. The **[Windows service README](voucher-status-service/README.md)** provides the concise service reference.

@@ -164,7 +164,7 @@ $form.Controls.Add($siteList)
 $origin = Field 'Portal origin' 'http://192.168.0.2:8088' 455
 $port = Field 'Service port' '3080' 488
 $save = Button 'Save configuration' 215 524 200
-$status = Setup-Label 'Node.js 22+ must be installed on this PC.' 570 70
+$status = Setup-Label 'Use the bundled Node.js runtime, or install Node.js 22 or newer.' 570 70
 
 $lowerLayout = @($form.Controls | Where-Object {
     $_.Top -ge 181 -and $_ -notin $certControls
@@ -253,8 +253,18 @@ $discover.Add_Click({
         $siteList.Items.Clear()
         $signature = Signature
         $info = New-Object Diagnostics.ProcessStartInfo
-        $info.FileName = (Get-Command node.exe -ErrorAction Stop).Source
-        if ([int]((& $info.FileName --version).TrimStart('v').Split('.')[0]) -lt 22) { throw 'Install Node.js 22 or newer before setup.' }
+        $portableNode = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\runtime\node.exe'))
+        if (Test-Path -LiteralPath $portableNode -PathType Leaf) {
+            $info.FileName = $portableNode
+        } else {
+            $installedNode = Join-Path $env:ProgramFiles 'nodejs\node.exe'
+            if (Test-Path -LiteralPath $installedNode -PathType Leaf) {
+                $info.FileName = $installedNode
+            } else {
+                $info.FileName = (Get-Command node.exe -ErrorAction Stop).Source
+            }
+        }
+        if ([int]((& $info.FileName --version).TrimStart('v').Split('.')[0]) -lt 22) { throw 'Use a portable or installed Node.js version 22 or newer.' }
         $info.Arguments = '"' + (Join-Path $PSScriptRoot 'setup-controller.mjs') + '"'
         $info.UseShellExecute = $false
         $info.CreateNoWindow = $true

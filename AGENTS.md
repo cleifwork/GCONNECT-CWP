@@ -14,6 +14,15 @@ When changing this project's portal, voucher-status service, installation proces
 
 For a documentation-only request, inspect the current implementation and update the existing guide directly. A separate agent is optional and requires explicit user authorization; no resident process is needed.
 
+## Commit message drafting
+
+After completing changes in this project, automatically include one short suggested commit message in the final response.
+
+- Review the relevant diff so the message reflects the completed changes. Exclude unrelated pre-existing edits unless the user asks to summarize all pending changes.
+- Use an imperative verb and a concise subject, preferably 72 characters or fewer. Add a body only when requested or necessary to explain a substantial change.
+- Draft the message only; do not stage, commit, or push without the user's instruction.
+- This is a task-driven instruction for the working agent, not a recurring automation or background process. Skip the suggestion when no files changed.
+
 ## Project location
 
 The canonical working project root is `/Users/cleif/Developer/omada-custom-hostpot-portals/OC-GCONNECT`, confirmed by the user on October 31, 2026. Use this original folder for future edits. The sibling `GCONNECT-CWP` checkout is retained separately and must not be assumed to sync edits here; the original folder currently has no Git remote or commits. Do not delete either copy or alter Git configuration without an appropriate user request.
