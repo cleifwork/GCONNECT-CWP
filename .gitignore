@@ -15,5 +15,3 @@ node_modules/
 *.zip
 .DS_Store
 Thumbs.db
-# Bundled Windows runtime binary
-/runtime/node.exe
